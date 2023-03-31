@@ -1,0 +1,57 @@
+﻿@model List<SSP.PayeModel.AssetTaxPayerDetailsApi>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Associated Business</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Business RIN</th>
+                    <th>Business Name</th>
+                    <th>Industry Sector</th>
+                    <th>Industry Sub-Sector</th>
+                    <th>Address</th>
+                    <th>LGA</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.AssetRin</td>
+                        <td>@item.AssetName</td>
+                        <td>@item.AssetTypeName</td>
+                        <td>@item.AssetTypeName</td>
+                        <td>@item.TaxPayerEmailAddress</td>
+                        <td>@item.AssetLga</td>
+                        <td>
+                            Internet
+                            Explorer 4.0
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Business RIN</th>
+                    <th>Business Name</th>
+                    <th>Industry Sector</th>
+                    <th>Industry Sub-Sector</th>
+                    <th>Address</th>
+                    <th>LGA</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
