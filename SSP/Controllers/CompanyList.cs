@@ -6,7 +6,7 @@ namespace SSP.Controllers
     public class CompanyList : Controller
     {
 
-        private ICompanyListApiRepository _repository;
+       private ICompanyListApiRepository _repository;
         public CompanyList()
         {
             _repository = new CompanyListApiRepository();
