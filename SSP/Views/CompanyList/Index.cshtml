@@ -5,77 +5,46 @@
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 }
 
-<div>
-   
-    <dl class="dl-horizontal">
-       @* <dt>
-            @Html.DisplayNameFor(model => model.TaxPayerId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TaxPayerId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TaxPayerTypeId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TaxPayerTypeId)
-        </dd>*@
-        <dt>
-            @Html.DisplayNameFor(model => model.TaxPayerTypeName)
-            <strong> : </strong>
-        </dt> 
-         
-        <dd>
-            @Html.DisplayFor(model => model.TaxPayerTypeName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TaxPayerName)
-            <strong> : </strong>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TaxPayerName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TaxPayerRin)
-            <strong> : </strong>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TaxPayerRin)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MobileNumber)
-            <strong> : </strong>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MobileNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactAddress)
-            <strong> : </strong>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ContactAddress)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailAddress)
-            <strong> : </strong>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EmailAddress)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Tin)<strong> : </strong>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Tin)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TaxOffice)<strong> : </strong>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TaxOffice)
-        </dd>
-       
-    </dl>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Company Details</h3>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>@Html.DisplayNameFor(model => model.TaxPayerTypeName)</dt>
+                        <dd>@Html.DisplayFor(model => model.TaxPayerTypeName)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.TaxPayerName)</dt>
+                        <dd>@Html.DisplayFor(model => model.TaxPayerName)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.TaxPayerRin)</dt>
+                        <dd>@Html.DisplayFor(model => model.TaxPayerRin)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.MobileNumber)</dt>
+                        <dd>@Html.DisplayFor(model => model.MobileNumber)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.ContactAddress)</dt>
+                        <dd>@Html.DisplayFor(model => model.ContactAddress)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.EmailAddress)</dt>
+                        <dd>@Html.DisplayFor(model => model.EmailAddress)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Tax Details</h3>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>@Html.DisplayNameFor(model => model.Tin)</dt>
+                        <dd>@Html.DisplayFor(model => model.Tin)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.TaxOffice)</dt>
+                        <dd>@Html.DisplayFor(model => model.TaxOffice)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
