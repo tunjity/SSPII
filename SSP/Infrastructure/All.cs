@@ -1,4 +1,4 @@
-﻿using SSP.Controllers;
+﻿
 using SSP.PayeModel;
 using System;
 
@@ -57,8 +57,14 @@ namespace SSP.Infrastructure
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<CompanyListApi> GetById(string id)
+        {
+            return _repository.GetById(id);
+        }
     }
     #endregion
+
     #region AssetTaxPayerDetailsApi
     public class AssetTaxPayerDetailsApiRepository : IAssetTaxPayerDetailsApiRepository
     {
@@ -98,6 +104,60 @@ namespace SSP.Infrastructure
         }
 
         public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<AssetTaxPayerDetailsApi> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion 
+
+    #region BusinessEmployee
+    public class BusinessEmployeeRepository : IBusinessEmployeeRepository
+    {
+        private IGenericRepository<BusinessEmployee> _repository = null;
+        public BusinessEmployeeRepository()
+        {
+            _repository = new GenericRepository<BusinessEmployee>();
+        }
+        public BusinessEmployeeRepository(IGenericRepository<BusinessEmployee> repository)
+        {
+            _repository = repository;
+        }
+     
+        public IEnumerable<BusinessEmployee> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public BusinessEmployee GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(BusinessEmployee BusinessEmployee)
+        {
+            _repository.Insert(BusinessEmployee);
+            _repository.Save();
+        }
+        public void Update(BusinessEmployee BusinessEmployee)
+        {
+            _repository.Update(BusinessEmployee);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<BusinessEmployee> GetById(string id)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SSP.PayeModel;
+using System.Collections.Generic;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SSP.Infrastructure
 {
@@ -8,6 +10,7 @@ namespace SSP.Infrastructure
     {
         IEnumerable<T> GetAll();
         T GetById(int id);
+        IEnumerable<T> GetById(string id);
         void Insert(T obj);
         void Update(T obj);
         void Delete(int id);
@@ -52,6 +55,16 @@ namespace SSP.Infrastructure
         public void Save()
         {
             _context.SaveChanges();
+        }
+        public IEnumerable<T> GetById(string id)
+        {
+            //var res = table.Where(x => getKey(x).Contains(id)).ToList();
+
+            return (IEnumerable<T>)table.Find(id);
+        }
+        public List<T> LikeSearch<T>(List<T> list, Func<T, string> getKey, string searchString)
+        {
+            return list.Where(x => getKey(x).Contains(searchString)).ToList();
         }
     }
 }

@@ -63,6 +63,8 @@ public partial class PinscherSpikeContext : DbContext
 
     public virtual DbSet<BusinessCategory> BusinessCategories { get; set; }
 
+    public virtual DbSet<BusinessEmployee> BusinessEmployees { get; set; }
+
     public virtual DbSet<BusinessOperation> BusinessOperations { get; set; }
 
     public virtual DbSet<BusinessSector> BusinessSectors { get; set; }
@@ -328,6 +330,7 @@ public partial class PinscherSpikeContext : DbContext
     public virtual DbSet<WinastAutoEmailDetail> WinastAutoEmailDetails { get; set; }
 
     public virtual DbSet<WinastAutoSmsDetail> WinastAutoSmsDetails { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -340,7 +343,6 @@ public partial class PinscherSpikeContext : DbContext
             optionsBuilder.UseSqlServer(connectionString);
         }
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AddPayeInputFile>(entity =>
@@ -1264,6 +1266,45 @@ public partial class PinscherSpikeContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("business_category");
             entity.Property(e => e.BusinessType).HasColumnName("business_type");
+        });
+
+        modelBuilder.Entity<BusinessEmployee>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_Business_Employee");
+
+            entity.Property(e => e.AssetRin)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Designation)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            entity.Property(e => e.EmployeeRin)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.EmployeeStatus)
+                .HasMaxLength(10)
+                .IsFixedLength();
+            entity.Property(e => e.EmployerRin)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("EmployerRIN");
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.OtherName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.StartDate).HasColumnType("datetime");
+            entity.Property(e => e.Surname)
+                .HasMaxLength(100)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<BusinessOperation>(entity =>
