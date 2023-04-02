@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSP.PayeModel;
 
@@ -16,6 +17,8 @@ public partial class BusinessEmployee
     public string? OtherName { get; set; }
 
     public string? Surname { get; set; }
+    [NotMapped]
+    public string? FullName => $"{FirstName} {OtherName}";
 
     public string? EmployeeStatus { get; set; }
 
