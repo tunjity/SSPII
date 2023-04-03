@@ -1,18 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SSP.Infrastructure;
+using SSP.Infrastructure.RawSql;
 
 namespace SSP.Controllers.MonthlyRemitance
 {
     public class Employee : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-        
-        public IActionResult Index(string EmployeesResp)
-        {
+        private IBusinessEmployeeRepository _repository;
+        private IAllRawSql _allRawSql;
 
-            return View();
+        public Employee()
+        {
+            _repository = new BusinessEmployeeRepository();
+            _allRawSql = new AllRawSql();
+        }
+        public IActionResult Index() => View();
+
+        public IActionResult GetbyName(int id)
+        {
+            var nameid = Convert.ToString(id);
+            var ret = _allRawSql.GetByEmployeeName(nameid);
+            return View(nameid);
         }
     }
 }
