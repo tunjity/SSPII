@@ -8,5 +8,11 @@ namespace SSP.Controllers.MonthlyRemitance
         {
             return View();
         }
+        
+        public IActionResult Index(string EmployeesResp)
+        {
+
+            return View();
+        }
     }
 }
