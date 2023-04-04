@@ -20,7 +20,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="txtsearch" placeholder="Search...">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-primary" id="searchbtn" type="button"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -28,30 +28,32 @@
             </div>
         </div>
         <div id="table">
-
-
         </div>
     </div>
     <div class="card-footer">
         <button type="button" class="btn btn-primary float-right">Forward Schedule</button>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('#search-btn').click(function () {
-            var searchTerm = $('#txtsearch').val();
-            $.ajax({
-                url: 'path/to/your/server/api',
-                method: 'GET',
-                data: { search: searchTerm },
-                success: function (response) {
-                    // Replace the table content with the response from the server
-                    $('#table').html(response);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
+
+<script type="text/javascript">
+
+    jQuery("#searchbtn").click(function () {
+          console.log("i am here");
+        var name = jQuery("#txtname").val();
+        jQuery.ajax({
+            type: "POST",
+            url: "/demo/Add",
+            data: {
+                NewName: name
+            },
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                alert(data.msg);
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
         });
     });
 </script>

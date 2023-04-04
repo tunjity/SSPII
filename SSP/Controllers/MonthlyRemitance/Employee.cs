@@ -7,6 +7,12 @@ namespace SSP.Controllers.MonthlyRemitance
         public IActionResult Index()
         {
             return View();
+        } 
+        
+        [HttpPost]
+        public IActionResult Index(string rin)
+        {
+            return View();
         }
     }
 }

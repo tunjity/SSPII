@@ -18,7 +18,7 @@ public partial class BusinessEmployee
 
     public string? Surname { get; set; }
     [NotMapped]
-    public string? FullName => $"{FirstName} {OtherName}";
+    public string? FullName => $"{FirstName} {OtherName} {Surname}";
 
     public string? EmployeeStatus { get; set; }
 
