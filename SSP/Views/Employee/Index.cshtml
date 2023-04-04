@@ -20,7 +20,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="txtsearch" placeholder="Search...">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" id="searchbtn" type="button"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-primary" id="search-btn" type="button"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -35,25 +35,27 @@
     </div>
 </div>
 
-<script type="text/javascript">
-
-    jQuery("#searchbtn").click(function () {
-          console.log("i am here");
-        var name = jQuery("#txtname").val();
-        jQuery.ajax({
-            type: "POST",
-            url: "/demo/Add",
-            data: {
-                NewName: name
-            },
-            dataType: "json",
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                alert(data.msg);
-            },
-            error: function () {
-                alert("Error occured!!")
-            }
+<script src="/NewTemplate/plugins/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#search-btn").click(function () {
+            var searchTerm = $("#txtsearch").val();
+            $.ajax({
+                type: "GET",
+                url: "https://api.example.com/employees",
+                data: {
+                    searchTerm: searchTerm
+                },
+                success: function (response) {
+                    console.log("ok");
+                    // handle the response data
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error");
+                    // handle the error
+                }
+            });
         });
     });
+
 </script>
