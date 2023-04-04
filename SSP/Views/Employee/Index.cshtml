@@ -20,7 +20,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="txtsearch" placeholder="Search...">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-primary" id="search-btn" type="button"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -28,30 +28,34 @@
             </div>
         </div>
         <div id="table">
-
-
         </div>
     </div>
     <div class="card-footer">
         <button type="button" class="btn btn-primary float-right">Forward Schedule</button>
     </div>
 </div>
+
+<script src="/NewTemplate/plugins/jquery/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#search-btn').click(function () {
-            var searchTerm = $('#txtsearch').val();
+        $("#search-btn").click(function () {
+            var searchTerm = $("#txtsearch").val();
             $.ajax({
-                url: 'path/to/your/server/api',
-                method: 'GET',
-                data: { search: searchTerm },
-                success: function (response) {
-                    // Replace the table content with the response from the server
-                    $('#table').html(response);
+                type: "GET",
+                url: "https://api.example.com/employees",
+                data: {
+                    searchTerm: searchTerm
                 },
-                error: function (xhr, status, error) {
-                    console.log(error);
+                success: function (response) {
+                    console.log("ok");
+                    // handle the response data
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error");
+                    // handle the error
                 }
             });
         });
     });
+
 </script>
