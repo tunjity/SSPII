@@ -22,6 +22,10 @@ namespace SSP.Controllers
                 return View(resp);
             }
             return View();
+        } 
+        public IActionResult Add()
+        {
+            return View();
         }
     }
 }

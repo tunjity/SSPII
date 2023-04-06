@@ -8,5 +8,6 @@ namespace SSP.Infrastructure
         CompanyListApi GetByRIN(string rin);
     }
     public interface IAssetTaxPayerDetailsApiRepository : IGenericRepository<AssetTaxPayerDetailsApi> { }
+    public interface IAgencyRepository : IGenericRepository<Agency> { }
     public interface IBusinessEmployeeRepository : IGenericRepository<BusinessEmployee> { }
 }

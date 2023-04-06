@@ -12,6 +12,7 @@ namespace SSP.Controllers.MonthlyRemitance
         [HttpPost]
         public IActionResult Index(string rin)
         {
+            // talk to payeinput table
             return View();
         }
     }

@@ -39,10 +39,12 @@
 <script>
     $(document).ready(function () {
         $("#search-btn").click(function () {
+            console.log("i got here");
+            alert("i reach here");
             var searchTerm = $("#txtsearch").val();
             $.ajax({
-                type: "GET",
-                url: "https://api.example.com/employees",
+                type: "POST",
+                url: "/Index",
                 data: {
                     searchTerm: searchTerm
                 },

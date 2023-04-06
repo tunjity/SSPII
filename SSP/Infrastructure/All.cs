@@ -163,4 +163,52 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
+    #region Agency
+    public class AgencyRepository : IAgencyRepository
+    {
+        private IGenericRepository<Agency> _repository = null;
+        public AgencyRepository()
+        {
+            _repository = new GenericRepository<Agency>();
+        }
+        public AgencyRepository(IGenericRepository<Agency> repository)
+        {
+            _repository = repository;
+        }
+     
+        public IEnumerable<Agency> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Agency GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(Agency Agency)
+        {
+            _repository.Insert(Agency);
+            _repository.Save();
+        }
+        public void Update(Agency Agency)
+        {
+            _repository.Update(Agency);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Agency> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
 }
