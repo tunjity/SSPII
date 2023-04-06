@@ -18,7 +18,7 @@ namespace SSP.Infrastructure
         {
             _repository = repository;
         }
-     
+
         public IEnumerable<CompanyListApi> GetAll()
         {
             //return _context.Employees.ToList();
@@ -77,7 +77,7 @@ namespace SSP.Infrastructure
         {
             _repository = repository;
         }
-     
+
         public IEnumerable<AssetTaxPayerDetailsApi> GetAll()
         {
             //return _context.Employees.ToList();
@@ -127,7 +127,7 @@ namespace SSP.Infrastructure
         {
             _repository = repository;
         }
-     
+
         public IEnumerable<BusinessEmployee> GetAll()
         {
             return _repository.GetAll();
@@ -163,6 +163,7 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
+
 
     #region AddPayeInputFile
     public class AddPayeInputFileRepository : IAddPayeInputFileRepository
@@ -212,7 +213,6 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
-
     #region Agency
     public class AgencyRepository : IAgencyRepository
     {
@@ -225,7 +225,6 @@ namespace SSP.Infrastructure
         {
             _repository = repository;
         }
-
         public IEnumerable<Agency> GetAll()
         {
             return _repository.GetAll();
@@ -261,7 +260,6 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
-
     #region AgencyType
     public class AgencyTypeRepository : IAgencyTypeRepository
     {
@@ -6485,56 +6483,6 @@ namespace SSP.Infrastructure
     }
     #endregion
 
-    #region VwSettlementReport2
-    public class VwSettlementReport2Repository : IVwSettlementReport2Repository
-    {
-        private IGenericRepository<VwSettlementReport2> _repository = null;
-        public VwSettlementReport2Repository()
-        {
-            _repository = new GenericRepository<VwSettlementReport2>();
-        }
-        public VwSettlementReport2Repository(IGenericRepository<VwSettlementReport2> repository)
-        {
-            _repository = repository;
-        }
-
-        public IEnumerable<VwSettlementReport2> GetAll()
-        {
-            return _repository.GetAll();
-        }
-        public VwSettlementReport2 GetById(int id)
-        {
-            return _repository.GetById(id);
-        }
-        public void Insert(VwSettlementReport2 VwSettlementReport2)
-        {
-            _repository.Insert(VwSettlementReport2);
-            _repository.Save();
-        }
-        public void Update(VwSettlementReport2 VwSettlementReport2)
-        {
-            _repository.Update(VwSettlementReport2);
-            _repository.Save();
-        }
-        public void Delete(int id)
-        {
-            _repository.Delete(id);
-            _repository.Save();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<VwSettlementReport2> GetById(string id)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    #endregion
-
-    
     #region VwShowBusinessPayeInputFile
     public class VwShowBusinessPayeInputFileRepository : IVwShowBusinessPayeInputFileRepository
     {
@@ -7514,7 +7462,5 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
-
-
 
 }
