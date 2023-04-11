@@ -18,7 +18,7 @@ namespace SSP.Infrastructure
         {
             _repository = repository;
         }
-
+     
         public IEnumerable<CompanyListApi> GetAll()
         {
             //return _context.Employees.ToList();
@@ -77,7 +77,7 @@ namespace SSP.Infrastructure
         {
             _repository = repository;
         }
-
+     
         public IEnumerable<AssetTaxPayerDetailsApi> GetAll()
         {
             //return _context.Employees.ToList();
@@ -127,7 +127,7 @@ namespace SSP.Infrastructure
         {
             _repository = repository;
         }
-
+     
         public IEnumerable<BusinessEmployee> GetAll()
         {
             return _repository.GetAll();
@@ -163,7 +163,6 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
-
 
     #region AddPayeInputFile
     public class AddPayeInputFileRepository : IAddPayeInputFileRepository
@@ -213,6 +212,7 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
+
     #region Agency
     public class AgencyRepository : IAgencyRepository
     {
@@ -225,6 +225,7 @@ namespace SSP.Infrastructure
         {
             _repository = repository;
         }
+
         public IEnumerable<Agency> GetAll()
         {
             return _repository.GetAll();
@@ -260,6 +261,7 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
+
     #region AgencyType
     public class AgencyTypeRepository : IAgencyTypeRepository
     {
@@ -6483,6 +6485,8 @@ namespace SSP.Infrastructure
     }
     #endregion
 
+
+    
     #region VwShowBusinessPayeInputFile
     public class VwShowBusinessPayeInputFileRepository : IVwShowBusinessPayeInputFileRepository
     {
@@ -7462,5 +7466,7 @@ namespace SSP.Infrastructure
         }
     }
     #endregion
+
+
 
 }
