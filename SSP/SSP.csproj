@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Models\ViewModel\" />
+    <Folder Include="Template\" />
     <Folder Include="wwwroot\NewTemplate\" />
   </ItemGroup>
 

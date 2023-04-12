@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSP.PayeModel;
 
@@ -30,7 +31,12 @@ public partial class PayeInputFile
     public double? AnnualBasic { get; set; }
 
     public double? AnnualRent { get; set; }
-
+    [NotMapped]
+    public string? FullName => $"{FirstName} {MiddleName} {Surname}";
+    [NotMapped]
+    public double? TotalIncome => AnnualBasic + AnnualRent + AnnualTransport + AnnualUtility; 
+    [NotMapped]
+    public double? TotalRelief => Pension + Nhis + Nhf ;
     public double? AnnualTransport { get; set; }
 
     public double? AnnualUtility { get; set; }

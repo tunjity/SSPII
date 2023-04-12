@@ -4,73 +4,90 @@
     ViewData["Title"] = "GetByRIN";
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 }
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Associated Business</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    @* <th>
+                    @Html.DisplayNameFor(model => model.EmployeeId)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.BusinessId)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
 
-<table class="table">
-    <thead>
-        <tr>
-           @* <th>
-                @Html.DisplayNameFor(model => model.EmployeeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BusinessId)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-           
-            <th>
-                @Html.DisplayNameFor(model => model.EmployeeStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Designation)
-            </th>
-           @* <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.EmployerRin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AssetRin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmployeeRin)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-              
-                <td>
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-              
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Designation)
-                </td>
-            
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmployerRin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AssetRin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeRin)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Designation)
+                    </th>
+                    @* <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployerRin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AssetRin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeRin)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Designation)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployerRin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssetRin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeRin)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Employee Status</th>
+                    <th>Designation</th>
+                    <th>EmployerRin</th>
+                    <th>AssetRin</th>
+                    <th>EmployeeRin</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

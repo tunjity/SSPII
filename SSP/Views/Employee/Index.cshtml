@@ -1,4 +1,4 @@
-﻿@model List<SSP.PayeModel.AssetTaxPayerDetailsApi>
+﻿@model List<SSP.PayeModel.PayeInputFile>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,28 +7,65 @@
 
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title mb-0">List of Employees for CBS</h5>
+        <h5 class="card-title mb-0">List of Employees</h5>
         <div class="float-right">
             <button type="button" class="btn btn-primary mr-2"><i class="fa fa-plus"></i> Bulk Upload</button>
             <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</button>
         </div>
     </div>
     <div class="card-body">
-        <div class="form-row mb-3">
-            <div class="col-md-6">
-                <label for="search-input">Business Name/ID</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="txtsearch" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" id="search-btn" type="button"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-            </div>
-        </div>
-        <div id="table">
-        </div>
+
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Tax Payer Id</th>
+                    <th>Full Name</th>
+                    <th>Total Income</th>
+                    <th>Total Reliefs</th>
+                    <th>Edit</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.EmployeeRin</td>
+                            <td>@item.FullName</td>
+                            <td>@item.TotalIncome</td>
+                            <td>@item.TotalRelief</td>
+                            <td>
+                                <button class="btn btn-primary mr-2">
+                                    <i class="fa fa-pencil"></i>
+                                    <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.EmployeeRin})" class="link-success" style="text-decoration: none; color:#fff">Edit</a>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="sidebar-dark-success">
+                                    <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.EmployeeRin})" class="link-success" style="text-decoration: none; color:#fff">Active/InActive</a>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Tax Payer Id</th>
+                    <th>Full Name</th>
+                    <th>Gross Income</th>
+                    <th>Total Income</th>
+                    <th>Pension</th>
+                    <th>NHIS</th>
+                    <th>NHF</th>
+                    <th>Edit</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
     <div class="card-footer">
         <button type="button" class="btn btn-primary float-right">Forward Schedule</button>
