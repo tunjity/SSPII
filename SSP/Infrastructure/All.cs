@@ -6485,9 +6485,7 @@ namespace SSP.Infrastructure
     }
     #endregion
 
-  
 
-    
     #region VwShowBusinessPayeInputFile
     public class VwShowBusinessPayeInputFileRepository : IVwShowBusinessPayeInputFileRepository
     {
