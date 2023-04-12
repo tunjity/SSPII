@@ -7468,6 +7468,298 @@ namespace SSP.Infrastructure
     }
     #endregion
 
+    #region User_Management
+    public class User_ManagementRepository : IUser_ManagementRepository
+    {
+        private IGenericRepository<User_Management> _repository = null;
+        public User_ManagementRepository()
+        {
+            _repository = new GenericRepository<User_Management>();
+        }
+        public User_ManagementRepository(IGenericRepository<User_Management> repository)
+        {
+            _repository = repository;
+        }
 
+        public IEnumerable<User_Management> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public User_Management GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(User_Management User_Management)
+        {
+            _repository.Insert(User_Management);
+            _repository.Save();
+        }
+        public void Update(User_Management User_Management)
+        {
+            _repository.Update(User_Management);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<User_Management> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
+
+    #region Business_Employee
+    public class Business_EmployeeRepository : IBusiness_EmployeeRepository
+    {
+        private IGenericRepository<Business_Employee> _repository = null;
+        public Business_EmployeeRepository()
+        {
+            _repository = new GenericRepository<Business_Employee>();
+        }
+        public Business_EmployeeRepository(IGenericRepository<Business_Employee> repository)
+        {
+            _repository = repository;
+        }
+
+        public IEnumerable<Business_Employee> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Business_Employee GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(Business_Employee Business_Employee)
+        {
+            _repository.Insert(Business_Employee);
+            _repository.Save();
+        }
+        public void Update(Business_Employee Business_Employee)
+        {
+            _repository.Update(Business_Employee);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Business_Employee> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
+
+    #region Employees_Monthly_Income
+    public class Employees_Monthly_IncomeRepository : IEmployees_Monthly_IncomeRepository
+    {
+        private IGenericRepository<Employees_Monthly_Income> _repository = null;
+        public Employees_Monthly_IncomeRepository()
+        {
+            _repository = new GenericRepository<Employees_Monthly_Income>();
+        }
+        public Employees_Monthly_IncomeRepository(IGenericRepository<Employees_Monthly_Income> repository)
+        {
+            _repository = repository;
+        }
+
+        public IEnumerable<Employees_Monthly_Income> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Employees_Monthly_Income GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(Employees_Monthly_Income Employees_Monthly_Income)
+        {
+            _repository.Insert(Employees_Monthly_Income);
+            _repository.Save();
+        }
+        public void Update(Employees_Monthly_Income Employees_Monthly_Income)
+        {
+            _repository.Update(Employees_Monthly_Income);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Employees_Monthly_Income> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
+
+    #region Employees_Monthly_Schedule
+    public class Employees_Monthly_ScheduleRepository : IEmployees_Monthly_ScheduleRepository
+    {
+        private IGenericRepository<Employees_Monthly_Schedule> _repository = null;
+        public Employees_Monthly_ScheduleRepository()
+        {
+            _repository = new GenericRepository<Employees_Monthly_Schedule>();
+        }
+        public Employees_Monthly_ScheduleRepository(IGenericRepository<Employees_Monthly_Schedule> repository)
+        {
+            _repository = repository;
+        }
+
+        public IEnumerable<Employees_Monthly_Schedule> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Employees_Monthly_Schedule GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(Employees_Monthly_Schedule Employees_Monthly_Schedule)
+        {
+            _repository.Insert(Employees_Monthly_Schedule);
+            _repository.Save();
+        }
+        public void Update(Employees_Monthly_Schedule Employees_Monthly_Schedule)
+        {
+            _repository.Update(Employees_Monthly_Schedule);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Employees_Monthly_Schedule> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
+
+    #region Schedule_Comment
+    public class Schedule_CommentRepository : ISchedule_CommentRepository
+    {
+        private IGenericRepository<Schedule_Comment> _repository = null;
+        public Schedule_CommentRepository()
+        {
+            _repository = new GenericRepository<Schedule_Comment>();
+        }
+        public Schedule_CommentRepository(IGenericRepository<Schedule_Comment> repository)
+        {
+            _repository = repository;
+        }
+
+        public IEnumerable<Schedule_Comment> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Schedule_Comment GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(Schedule_Comment Schedule_Comment)
+        {
+            _repository.Insert(Schedule_Comment);
+            _repository.Save();
+        }
+        public void Update(Schedule_Comment Schedule_Comment)
+        {
+            _repository.Update(Schedule_Comment);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Schedule_Comment> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
+
+    #region Schedule_Status
+    public class Schedule_StatusRepository : ISchedule_StatusRepository
+    {
+        private IGenericRepository<Schedule_Status> _repository = null;
+        public Schedule_StatusRepository()
+        {
+            _repository = new GenericRepository<Schedule_Status>();
+        }
+        public Schedule_StatusRepository(IGenericRepository<Schedule_Status> repository)
+        {
+            _repository = repository;
+        }
+
+        public IEnumerable<Schedule_Status> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Schedule_Status GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(Schedule_Status Schedule_Status)
+        {
+            _repository.Insert(Schedule_Status);
+            _repository.Save();
+        }
+        public void Update(Schedule_Status Schedule_Status)
+        {
+            _repository.Update(Schedule_Status);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Schedule_Status> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
 
 }

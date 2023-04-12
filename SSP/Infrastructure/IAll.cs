@@ -163,4 +163,14 @@ namespace SSP.Infrastructure
     public interface IWinastAutoSmsDetailRepository : IGenericRepository<WinastAutoSmsDetail> { }
 
 
+
+
+    public interface IUser_ManagementRepository : IGenericRepository<User_Management> { }
+    public interface IBusiness_EmployeeRepository : IGenericRepository<Business_Employee> { }
+    public interface IEmployees_Monthly_IncomeRepository : IGenericRepository<Employees_Monthly_Income> { }
+    public interface IEmployees_Monthly_ScheduleRepository : IGenericRepository<Employees_Monthly_Schedule> { }
+    public interface ISchedule_CommentRepository : IGenericRepository<Schedule_Comment> { }
+    public interface ISchedule_StatusRepository : IGenericRepository<Schedule_Status> { }
+
+
 }
