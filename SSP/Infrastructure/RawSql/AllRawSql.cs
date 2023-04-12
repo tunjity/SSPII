@@ -7,10 +7,24 @@ namespace SSP.Infrastructure.RawSql
     public interface IAllRawSql
     {
         List<BusinessEmployee> GetBusinessEmployeebyRin(string rin);
+        List<PayeInputFile> GetPayeInputFilebyRin(string rin);
+        List<AssetTaxPayerDetailsApi> GetAssociateBusinessbyRin(string rin);
         CompanyListApi GetCompanyListApibyRin(string rin);
     }
     public class AllRawSql : IAllRawSql
     {
+        public List<AssetTaxPayerDetailsApi> GetAssociateBusinessbyRin(string rin)
+        {
+            List<AssetTaxPayerDetailsApi> employees = new List<AssetTaxPayerDetailsApi>();
+            using (var db = new PinscherSpikeContext())
+            {
+                employees = db.AssetTaxPayerDetailsApis
+                                .FromSqlRaw($"Select * from [AssetTaxPayerDetails_API] where TaxPayerRINNumber = '{rin}'")
+                                .ToList();
+
+            }
+            return employees;
+        }
 
         public List<BusinessEmployee> GetBusinessEmployeebyRin(string rin)
         {
@@ -22,7 +36,18 @@ namespace SSP.Infrastructure.RawSql
                                 .ToList();
 
             }
+            return employees;
+        } 
+        public List<PayeInputFile> GetPayeInputFilebyRin(string rin)
+        {
+            List<PayeInputFile> employees = new List<PayeInputFile>();
+            using (var db = new PinscherSpikeContext())
+            {
+                employees = db.PayeInputFiles
+                                .FromSqlRaw($"Select * from PayeInputFile where employerrin = '{rin}' order by Assessment_Year desc")
+                                .ToList();
 
+            }
             return employees;
         }
 
