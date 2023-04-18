@@ -1,5 +1,5 @@
 ﻿using SSP.Infrastructure;
-using SSP.PayeModel;
+using SSP.Payee;
 
 namespace SSP.Repository
 {

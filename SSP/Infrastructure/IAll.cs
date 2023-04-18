@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System;
-using SSP.PayeModel;
+using SSP.Payee;
 
 namespace SSP.Infrastructure
 {
@@ -34,7 +34,6 @@ namespace SSP.Infrastructure
     public interface IBusinessCategoryRepository : IGenericRepository<BusinessCategory> { }
     public interface IBusinessesApiRepository : IGenericRepository<BusinessesApi> { }
     public interface IBusinessesApiMainRepository : IGenericRepository<BusinessesApiMain> { }
-    public interface IBusinessesBkApiRepository : IGenericRepository<BusinessesBkApi> { }
     public interface IBusinessesFullApiRepository : IGenericRepository<BusinessesFullApi> { }
     public interface IBusinessOperationRepository : IGenericRepository<BusinessOperation> { }
     public interface IBusinessSectorRepository : IGenericRepository<BusinessSector> { }
@@ -42,9 +41,7 @@ namespace SSP.Infrastructure
     public interface IBusinessSubSectorRepository : IGenericRepository<BusinessSubSector> { }
     public interface IBusinessTypeRepository : IGenericRepository<BusinessType> { }
     public interface IClearanceCertificateRepository : IGenericRepository<ClearanceCertificate> { }
-    public interface ICompaniesApiRepository : IGenericRepository<CompaniesApi> { }
-    public interface ICompanyRepository : IGenericRepository<Company> { }
-    public interface ICompanyListBkApiRepository : IGenericRepository<CompanyListBkApi> { }
+   
     public interface IDirectorateRepository : IGenericRepository<Directorate> { }
     public interface IEconomicActivityRepository : IGenericRepository<EconomicActivity> { }
     public interface IEirsUserRepository : IGenericRepository<EirsUser> { }
@@ -162,15 +159,11 @@ namespace SSP.Infrastructure
     public interface IWinastAutoEmailDetailRepository : IGenericRepository<WinastAutoEmailDetail> { }
     public interface IWinastAutoSmsDetailRepository : IGenericRepository<WinastAutoSmsDetail> { }
 
-
-
-
-    public interface IUser_ManagementRepository : IGenericRepository<User_Management> { }
-    public interface IBusiness_EmployeeRepository : IGenericRepository<Business_Employee> { }
-    public interface IEmployees_Monthly_IncomeRepository : IGenericRepository<Employees_Monthly_Income> { }
-    public interface IEmployees_Monthly_ScheduleRepository : IGenericRepository<Employees_Monthly_Schedule> { }
-    public interface ISchedule_CommentRepository : IGenericRepository<Schedule_Comment> { }
-    public interface ISchedule_StatusRepository : IGenericRepository<Schedule_Status> { }
+    public interface IUserManagementRepository : IGenericRepository<UserManagement> { }
+    public interface IEmployeesMonthlyIncomeRepository : IGenericRepository<EmployeesMonthlyIncome> { }
+    public interface IEmployeesMonthlyScheduleRepository : IGenericRepository<EmployeesMonthlySchedule> { }
+    public interface IScheduleCommentRepository : IGenericRepository<ScheduleComment> { }
+    public interface IScheduleStatusRepository : IGenericRepository<ScheduleStatus> { }
 
 
 }

@@ -1,34 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SSP.Infrastructure.RawSql;
 using SSP.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SSP.Controllers.MonthlyRemitance
 {
     public class Employee : Controller
     {
-        private IPayeInputFileRepository _repository;
+        private IEmployeesMonthlyIncomeRepository _repository;
         private IAllRawSql _allRawSql;
         public Employee()
         {
-            _repository = new PayeInputFileRepository();
+            _repository = new EmployeesMonthlyIncomeRepository();
             _allRawSql = new AllRawSql();
         }
-        public IActionResult Index()
+        public IActionResult Index(string searchData)
         {
-            if (HttpContext.Session.GetString("rin") != null)
+            if ((HttpContext.Session.GetString("rin") != null) && (searchData ==null))
             {
                 string rin = HttpContext.Session.GetString("rin").ToString();
-                var resp = _allRawSql.GetPayeInputFilebyRin(rin);
-                return View(resp);
+                var lstTaxPayerAsset = _allRawSql.GetAssociateBusinessbyRin(rin);
+                ViewBag.TaxBusiness = new SelectList(lstTaxPayerAsset.Select(t => new { id = t.Id, text = t.AssetName }).Distinct(), "id", "text");
+                
+                return View();
+            }
+            else if(searchData != null )
+            {
+
+                var rs = _repository.GetById(searchData);
+                ViewBag.EmployeesMonthlyIncome = rs;
             }
             return RedirectToAction("Login", "SignIn");
         } 
         
-        [HttpPost]
-        public IActionResult Index(string rin)
+        [HttpGet]
+        public JsonResult IndexWithTable(string rin)
         {
-            // talk to payeinput table
-            return View();
+            var rs = _repository.GetById(rin);
+            return Json(new { data = rs });
         }
     }
 }

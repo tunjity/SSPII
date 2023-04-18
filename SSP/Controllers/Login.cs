@@ -27,6 +27,12 @@ namespace SSP.Controllers
         }
 
         [HttpGet]
+        public ActionResult SignOut()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/Login/SignIn");
+        } 
+        [HttpGet]
         public ActionResult SignIn()
         {
             var getTaxpayertype = _db.TaxPayerTypes.ToList();
