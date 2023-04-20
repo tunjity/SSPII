@@ -10,6 +10,7 @@ namespace SSP.Infrastructure
     {
         IEnumerable<T> GetAll();
         T GetById(int id);
+        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
         IEnumerable<T> GetById(string id);
         void Insert(T obj);
         void Update(T obj);
@@ -42,6 +43,10 @@ namespace SSP.Infrastructure
         {
             table.Add(obj);
         }
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
+          !trackChanges ?
+              table.Where(expression)
+              .AsNoTracking() : table.Where(expression);
         public void Update(T obj)
         {
             table.Attach(obj);
