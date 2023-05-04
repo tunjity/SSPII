@@ -62,6 +62,7 @@ namespace SSP.Controllers
                 {
                     HttpContext.Session.SetString("username", ret.CompanyName.ToString());
                     HttpContext.Session.SetString("rin", ret.CompanyRin.ToString());
+                    HttpContext.Session.SetString("id", ret.CompanyId.ToString());
                     TempData["AlertMessage"] = $"Welcome {ret.CompanyName}";
                     return Redirect("/Dashboard/Index");
                 }

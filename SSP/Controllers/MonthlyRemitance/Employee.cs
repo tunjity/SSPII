@@ -17,7 +17,7 @@ namespace SSP.Controllers.MonthlyRemitance
         {
             if (HttpContext.Session.GetString("rin") != null)
             {
-                string rin = HttpContext.Session.GetString("rin").ToString();
+                string rin = HttpContext.Session.GetString("id").ToString();
                 var resp = _allRawSql.GetPayeInputFilebyRin(rin);
                 return View(resp);
             }

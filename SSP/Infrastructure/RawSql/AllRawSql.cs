@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SSP.PayeModel;
+using SSP.PayeModelII;
 using System.Collections.Generic;
 
 namespace SSP.Infrastructure.RawSql
@@ -16,7 +16,7 @@ namespace SSP.Infrastructure.RawSql
         public List<AssetTaxPayerDetailsApi> GetAssociateBusinessbyRin(string rin)
         {
             List<AssetTaxPayerDetailsApi> employees = new List<AssetTaxPayerDetailsApi>();
-            using (var db = new PinscherSpikeContext())
+            using (var db = new PayeeContext())
             {
                 employees = db.AssetTaxPayerDetailsApis
                                 .FromSqlRaw($"Select * from [AssetTaxPayerDetails_API] where TaxPayerRINNumber = '{rin}'")
@@ -29,10 +29,10 @@ namespace SSP.Infrastructure.RawSql
         public List<BusinessEmployee> GetBusinessEmployeebyRin(string rin)
         {
             List<BusinessEmployee> employees = new List<BusinessEmployee>();
-            using (var db = new PinscherSpikeContext())
+            using (var db = new PayeeContext())
             {
                 employees = db.BusinessEmployees
-                                .FromSqlRaw($"Select * from Business_Employee where assetrin = '{rin}'")
+                                .FromSqlRaw($"Select * from BusinessEmployee where assetrin = '{rin}'")
                                 .ToList();
 
             }
@@ -41,7 +41,7 @@ namespace SSP.Infrastructure.RawSql
         public List<PayeInputFile> GetPayeInputFilebyRin(string rin)
         {
             List<PayeInputFile> employees = new List<PayeInputFile>();
-            using (var db = new PinscherSpikeContext())
+            using (var db = new PayeeContext())
             {
                 employees = db.PayeInputFiles
                                 .FromSqlRaw($"Select * from PayeInputFile where employerrin = '{rin}' order by Assessment_Year desc")
@@ -54,7 +54,7 @@ namespace SSP.Infrastructure.RawSql
         public CompanyListApi GetCompanyListApibyRin(string rin)
         {
             CompanyListApi? res = new CompanyListApi();
-            using (var db = new PinscherSpikeContext())
+            using (var db = new PayeeContext())
             {
                 res = db.CompanyListApis
                                 .FromSqlRaw($"Select * from CompanyList_API where TaxPayerRin = '{rin}'")

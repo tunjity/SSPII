@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SSP.PayeModel;
+using SSP.PayeModelII;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -18,14 +18,14 @@ namespace SSP.Infrastructure
     }
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private PinscherSpikeContext _context = null;
+        private PayeeContext _context = null;
         private DbSet<T> table = null;
         public GenericRepository()
         {
-            this._context = new PinscherSpikeContext();
+            this._context = new PayeeContext();
             table = _context.Set<T>();
         }
-        public GenericRepository(PinscherSpikeContext _context)
+        public GenericRepository(PayeeContext _context)
         {
             this._context = _context;
             table = _context.Set<T>();
