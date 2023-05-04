@@ -7366,7 +7366,7 @@ namespace SSP.Infrastructure
 
         public IEnumerable<EmployeesMonthlyIncome> GetById(string id)
         {
-            throw new NotImplementedException();
+            return _repository.GetById(id);
         }
     }
     #endregion
