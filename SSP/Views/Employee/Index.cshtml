@@ -9,7 +9,11 @@
     <div class="card-header">
         <h5 class="card-title mb-0">List of Employees</h5>
         <div class="float-right">
-            <button type="button" class="btn btn-primary mr-2"><i class="fa fa-plus"></i> Bulk Upload</button>
+            <button type="button" class="btn btn-primary mr-2">
+                <i class="fa fa-plus">
+                    <a href="@Url.Action("Upload", "Employee")" class="link-success" style="text-decoration: none; color:#fff">Edit</a>
+                </i> Bulk Upload
+            </button>
             <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</button>
         </div>
     </div>

@@ -1,6 +1,8 @@
 ﻿
+using Azure;
 using SSP.PayeModelII;
 using System;
+using System.Linq.Expressions;
 
 namespace SSP.Infrastructure
 {
@@ -61,6 +63,16 @@ namespace SSP.Infrastructure
         public IEnumerable<CompanyListApi> GetById(string id)
         {
             return _repository.GetById(id);
+        }
+
+        //public IQueryable<CompanyListApi> GetMany(Expression<Func<CompanyListApi, bool>> where)
+        //{
+        //   return _repository.GetMany(c=>c.CompanyListId == new )
+        //}
+
+        public IQueryable<CompanyListApi> FindByCondition(Expression<Func<CompanyListApi, bool>> expression, bool trackChanges)
+        {
+            throw new NotImplementedException();
         }
     }
     #endregion
@@ -7368,6 +7380,13 @@ namespace SSP.Infrastructure
         {
             return _repository.GetById(id);
         }
+
+        //public IQueryable<EmployeesMonthlyIncome> FindByCondition(string compId, bool trackChanges)
+        //{
+        //    var res = new List<EmployeesMonthlyIncome>();
+        //    res = FindByCondition(c => c.CompanyId == compId, false).ToList();
+        //    return res;
+        //}
     }
     #endregion
 

@@ -58,7 +58,7 @@ namespace SSP.Controllers
 
             if (ret != null)
             {
-                if(BCrypt.Net.BCrypt.Verify(model.Password, ret.Password))
+                if (BCrypt.Net.BCrypt.Verify(model.Password, ret.Password))
                 {
                     HttpContext.Session.SetString("username", ret.CompanyName.ToString());
                     HttpContext.Session.SetString("rin", ret.CompanyRin.ToString());
@@ -168,6 +168,47 @@ namespace SSP.Controllers
             return View();
         }
         [HttpGet]
+        public ActionResult CreateAccountStepOne()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateAccountStepOneDone(CompanyFormModel model)
+        {
+            string mob = model.MobileNumber1orRIN;
+            if (!mob.StartsWith("CMP"))
+            {
+                //incase of +
+                mob = mob.Replace("+", "");
+                // incase of 234
+                if (mob.StartsWith("234"))
+                    mob = $"0{mob.Substring(3)}";
+                if (!mob.StartsWith("0"))
+                {
+                    mob = "0" + model.MobileNumber1orRIN;
+                }
+                else
+                {
+                    TempData["AlertMessage"] = $"Error Invalid Phone Number Format";
+                    return Redirect("/Login/CreateAccount");
+                }
+            }
+            //send sms region
+            string? SmsBaseUrl = config.GetConnectionString("SmsBaseUrl");
+            string? username = config.GetConnectionString("username");
+            string? password = config.GetConnectionString("password");
+            //check if it exist
+            var checker = _db.Companies.FirstOrDefault(o => (o.MobileNumber1 == mob) || (o.CompanyRin == mob));
+            if (checker != null)
+            {
+                TempData["AlertMessage"] = $"Error User Already Exist";
+                return Redirect("/Login/CreateAccount");
+            }
+          
+            return View(checker);
+        }
+        [HttpGet]
         public ActionResult ValidateOTPAccount()
         {
             return View();
@@ -189,14 +230,14 @@ namespace SSP.Controllers
             company.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
             _db.Companies.Add(company);
-            int i=_db.SaveChanges();
-            if(i != 0)
+            int i = _db.SaveChanges();
+            if (i != 0)
             {
                 HttpContext.Session.SetString("username", company.CompanyName.ToString());
                 TempData["AlertMessage"] = $"Registration Was Successful";
                 return Redirect("/Dashboard/Index");
             }
-           return View();
+            return View();
         }
         [NonAction]
         public static bool SendSMS(string pStrToNumber, string pStrBody, string email, string password, string url)

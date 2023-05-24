@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Login\CreateAccountStepOne.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
@@ -27,6 +31,18 @@
     <Folder Include="Models\ViewModel\" />
     <Folder Include="Template\" />
     <Folder Include="wwwroot\NewTemplate\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Login\CreateAccountStepOne.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Login\CreateAccountStepOne.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Login\CreateAccountStepOne.cshtml" />
   </ItemGroup>
 
 </Project>

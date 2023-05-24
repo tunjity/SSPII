@@ -9,11 +9,14 @@ namespace SSP.Infrastructure
     public interface IGenericRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
+       // IQueryable<T> GetMany(Expression<Func<T, bool>> where);
         T GetById(int id);
         IEnumerable<T> GetById(string id);
         void Insert(T obj);
         void Update(T obj);
         void Delete(int id);
+
+        //IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
         void Save();
     }
     public class GenericRepository<T> : IGenericRepository<T> where T : class
@@ -58,13 +61,21 @@ namespace SSP.Infrastructure
         }
         public IEnumerable<T> GetById(string id)
         {
-            //var res = table.Where(x => getKey(x).Contains(id)).ToList();
+            //  return table.Where(x => getKey(x).Contains(id)).ToList();
 
-            return (IEnumerable<T>)table.Find(id);
+            return (IEnumerable<T>)table;
         }
-        public List<T> LikeSearch<T>(List<T> list, Func<T, string> getKey, string searchString)
-        {
-            return list.Where(x => getKey(x).Contains(searchString)).ToList();
-        }
+        //public IQueryable<T> GetMany(Expression<Func<T, bool>> where)
+        //{
+        //    //  return table.Where(x => getKey(x).Contains(id)).ToList();
+
+        //    return table.AsNoTracking().Where(where);
+        //}
+
+        //public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
+        //      !trackChanges ?
+        //          _context.Set<T>()
+        //          .Where(expression)
+        //          .AsNoTracking() : _context.Set<T>().Where(expression);
     }
 }

@@ -12,7 +12,7 @@ public partial class Business
 
     public string BusinessName { get; set; } = null!;
     [NotMapped]
-   public virtual ICollection<BusinessEmployee> BusinessEmployees { get; } = new List<BusinessEmployee>();
+    public virtual ICollection<BusinessEmployee> BusinessEmployees { get; } = new List<BusinessEmployee>();
 
     public virtual ICollection<EmployeesMonthlyIncome> EmployeesMonthlyIncomes { get; } = new List<EmployeesMonthlyIncome>();
 }

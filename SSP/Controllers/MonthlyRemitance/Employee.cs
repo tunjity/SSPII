@@ -2,6 +2,7 @@
 using SSP.Infrastructure.RawSql;
 using SSP.Infrastructure;
 using SSP.PayeModelII;
+using Azure;
 
 namespace SSP.Controllers.MonthlyRemitance
 {
@@ -19,8 +20,10 @@ namespace SSP.Controllers.MonthlyRemitance
             if (HttpContext.Session.GetString("rin") != null)
             {
                 string rin = HttpContext.Session.GetString("id").ToString();
-                List<EmployeesMonthlyIncome> resp = new List<EmployeesMonthlyIncome>();
-                resp = _repository.GetById(rin).ToList();
+                List<EmployeesMonthlyIncome> response = new List<EmployeesMonthlyIncome>();
+               // response = FindByCondition(c => c.SubRegionId == Id, false).Include(c => c.SubRegion).ToList();
+
+                var resp = _repository.GetById(rin).ToList();
                 return View(resp);
             }
             return RedirectToAction("Login", "SignIn");
