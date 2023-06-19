@@ -6,6 +6,7 @@ namespace SSP.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.DisplayDashboard = "1";
             return View();
         } 
         public IActionResult Logout()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSP.PayeModelII;
 
@@ -32,6 +33,10 @@ public partial class EmployeesMonthlyIncome
     public double Nhis { get; set; }
 
     public double Pension { get; set; }
+    [NotMapped]
+    public double TotalIncome { get; set; }
+    [NotMapped]
+    public double TotalRelief { get; set; }
 
     public double LifeAssurance { get; set; }
 

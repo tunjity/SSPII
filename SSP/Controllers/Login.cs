@@ -3,12 +3,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using SSP.EIRSModel;
+using SSP.Infrastructure.Utility;
 using SSP.Models.CreationModel;
+using SSP.PayeModelII;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Net;
 using System.Text;
 using Vereyon.Web;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using TaxPayerType = SSP.EIRSModel.TaxPayerType;
 
 namespace SSP.Controllers
 {
@@ -29,8 +33,9 @@ namespace SSP.Controllers
         [HttpGet]
         public ActionResult SignIn()
         {
+            
             var getTaxpayertype = _db.TaxPayerTypes.ToList();
-            ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
+            ViewBag.TaxPayerTypeList = getTaxpayertype.ToSelectList(nameof(TaxPayerType.TaxPayerTypeName), nameof(TaxPayerType.TaxPayerTypeName));
 
             return View();
         }
@@ -40,7 +45,8 @@ namespace SSP.Controllers
             if (model.UserType != "Company")
             {
                 var getTaxpayertype = _db.TaxPayerTypes.ToList();
-                ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
+                ViewBag.TaxPayerTypeList = getTaxpayertype.ToSelectList(nameof(TaxPayerType.TaxPayerTypeName), nameof(TaxPayerType.TaxPayerTypeName));
+
 
                 TempData["AlertMessage"] = $"Incorrect UserType";
                 return View();
@@ -48,13 +54,14 @@ namespace SSP.Controllers
             if ((model.Password == null) || (model.Password.Length < 5))
             {
                 var getTaxpayertype = _db.TaxPayerTypes.ToList();
-                ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
+                ViewBag.TaxPayerTypeList = getTaxpayertype.ToSelectList(nameof(TaxPayerType.TaxPayerTypeName), nameof(TaxPayerType.TaxPayerTypeName));
+
                 ModelState.AddModelError("Password", "Please Enter Valid Password as the length is less than 5");
                 TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
                 return View();
             }
             Company eirsUser = new Company();
-            var ret = _db.Companies.SingleOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.MobileNumber1 == model.PhoneNumber_RIN.ToString().Trim()));
+            var ret = _db.Companies.FirstOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.MobileNumber1 == model.PhoneNumber_RIN.ToString().Trim()));
 
             if (ret != null)
             {
@@ -105,7 +112,6 @@ namespace SSP.Controllers
         [HttpGet]
         public ActionResult CreateAccount()
         {
-
             return View();
         }
         [HttpPost]
@@ -167,10 +173,9 @@ namespace SSP.Controllers
             }
             return View();
         }
-        [HttpGet]
+        //[HttpGet]
         public ActionResult CreateAccountStepOne()
         {
-
             return View();
         }
         [HttpPost]
@@ -183,10 +188,14 @@ namespace SSP.Controllers
                 mob = mob.Replace("+", "");
                 // incase of 234
                 if (mob.StartsWith("234"))
-                    mob = $"0{mob.Substring(3)}";
-                if (!mob.StartsWith("0"))
+                    mob = mob.Substring(3);
+                if (mob.StartsWith("0"))
                 {
-                    mob = "0" + model.MobileNumber1orRIN;
+                    mob = mob.Substring(1);
+                }
+                else if (!mob.StartsWith("0"))
+                {
+                    mob = mob;
                 }
                 else
                 {
@@ -194,18 +203,37 @@ namespace SSP.Controllers
                     return Redirect("/Login/CreateAccount");
                 }
             }
+            //check if it exist
+            var checker = _db.Companies.FirstOrDefault(o => (o.MobileNumber1 == mob) || (o.CompanyRin == mob));
+            if (checker == null)
+            {
+                TempData["AlertMessage"] = $"Profile Not Found";
+                return Redirect("/Login/SignIn");
+            }
             //send sms region
             string? SmsBaseUrl = config.GetConnectionString("SmsBaseUrl");
             string? username = config.GetConnectionString("username");
             string? password = config.GetConnectionString("password");
-            //check if it exist
-            var checker = _db.Companies.FirstOrDefault(o => (o.MobileNumber1 == mob) || (o.CompanyRin == mob));
-            if (checker != null)
+            
+            Random r = new Random();
+            var x = r.Next(0, 1000000);
+            string s = x.ToString("000000");
+            StringBuilder sbSMSContent = new StringBuilder();
+            sbSMSContent.Append("Use "); sbSMSContent.Append(s); sbSMSContent.Append(" as your Login OTP To Edo State Self Service Portal, This expiry at the close of this page");
+            bool ret = SendSMS(checker.MobileNumber1, sbSMSContent.ToString(), username, password, SmsBaseUrl);
+            if (ret)
             {
-                TempData["AlertMessage"] = $"Error User Already Exist";
-                return Redirect("/Login/CreateAccount");
+                checker.VerificationOtp = Convert.ToInt32(s);
+                TempData["cmpy"] = JsonConvert.SerializeObject(checker);
+                //alert otp sent
+                TempData["AlertMessage"] = $"OTP sent";
             }
-          
+            if (checker.MobileNumber1 != null)
+            {
+                checker.MobileNumber1 = checker.MobileNumber1.Remove(checker.MobileNumber1.Length - 4, 4);
+                checker.MobileNumber1 = checker.MobileNumber1 + "****";
+            }
+
             return View(checker);
         }
         [HttpGet]
@@ -221,15 +249,19 @@ namespace SSP.Controllers
             {
                 return Redirect("/Login/CreateAccount");
             }
-            //if (company.VerificationOtp != model.VerificationOtp)
-            //{
-            //    TempData["AlertMessage"] = $"Error Incorrect OTP";
-            //    //alert in correct otp
-            //    return Redirect("/Login/CreateAccount");
-            //}
+            if (company.VerificationOtp != model.VerificationOtp)
+            {
+                TempData["AlertMessage"] = $"Error Incorrect OTP";
+                //alert in correct otp
+                return Redirect("/Login/CreateAccount");
+            }
             company.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
-            _db.Companies.Add(company);
+            //get records
+            var formalRecord =_db.Companies.FirstOrDefault(x => x.CompanyId == company.CompanyId);
+            formalRecord.Password = company.Password;
+            formalRecord.VerificationOtp = company.VerificationOtp;
+            //_db.Update(company);
             int i = _db.SaveChanges();
             if (i != 0)
             {
@@ -263,21 +295,5 @@ namespace SSP.Controllers
             return true;
         }
 
-        [NonAction]
-        public SelectList ToSelectList(List<TaxPayerType> table)
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-
-            foreach (var row in table)
-            {
-                list.Add(new SelectListItem()
-                {
-                    Text = row.TaxPayerTypeName.ToString(),
-                    Value = row.TaxPayerTypeName.ToString()
-                });
-            }
-
-            return new SelectList(list, "Value", "Text");
-        }
     }
 }

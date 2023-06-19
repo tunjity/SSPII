@@ -52,6 +52,7 @@ namespace SSP.Infrastructure
     public interface IEmployeeContributionOutputFileRepository : IGenericRepository<EmployeeContributionOutputFile> { }
     public interface IEmployerAssessmentOutputFileRepository : IGenericRepository<EmployerAssessmentOutputFile> { }
     public interface IExceptionTypeRepository : IGenericRepository<ExceptionType> { }
+    public interface IEmployeeRepository : IGenericRepository<Employee> { }
     public interface IFileStatusRepository : IGenericRepository<FileStatus> { }
     public interface IFormMasterRepository : IGenericRepository<FormMaster> { }
     public interface IGroupFormRelationRepository : IGenericRepository<GroupFormRelation> { }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using SSP.Models;
 
 namespace SSP.PayeModelII;
 
@@ -183,6 +184,7 @@ public partial class PayeeContext : DbContext
 
     public virtual DbSet<SalaryBreakup> SalaryBreakups { get; set; }
 
+    public virtual DbSet<CreateSingleEmployeeModel> CreateSingleEmployeeModels { get; set; }
     public virtual DbSet<SalaryTypeMaster> SalaryTypeMasters { get; set; }
 
     public virtual DbSet<ScheduleComment> ScheduleComments { get; set; }
@@ -352,8 +354,17 @@ public partial class PayeeContext : DbContext
     public virtual DbSet<WinastAutoSmsDetail> WinastAutoSmsDetails { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=92.205.57.77;Initial Catalog=PAYEE;user id=Admin;password=K5?wh7l4##;MultipleActiveResultSets=True;TrustServerCertificate=True");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json")
+               .Build();
+            var connectionString = configuration.GetConnectionString("PayeContext");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+    }// => optionsBuilder.UseSqlServer("Data Source=92.205.57.77;Initial Catalog=PAYEE;user id=Admin;password=K5?wh7l4##;MultipleActiveResultSets=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

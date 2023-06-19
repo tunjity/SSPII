@@ -1940,6 +1940,54 @@ namespace SSP.Infrastructure
             throw new NotImplementedException();
         }
     }
+    #endregion 
+    #region Employee
+    public class EmployeeRepository : IEmployeeRepository
+    {
+        private IGenericRepository<Employee> _repository = null;
+        public EmployeeRepository()
+        {
+            _repository = new GenericRepository<Employee>();
+        }
+        public EmployeeRepository(IGenericRepository<Employee> repository)
+        {
+            _repository = repository;
+        }
+
+        public IEnumerable<Employee> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Employee GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+        public void Insert(Employee Employee)
+        {
+            _repository.Insert(Employee);
+            _repository.Save();
+        }
+        public void Update(Employee Employee)
+        {
+            _repository.Update(Employee);
+            _repository.Save();
+        }
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            _repository.Save();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Employee> GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+    }
     #endregion
 
     #region EmployeeContributionOutputFile

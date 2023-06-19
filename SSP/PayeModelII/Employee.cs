@@ -15,6 +15,8 @@ public partial class Employee
     public string? MiddleName { get; set; }
 
     public string LastName { get; set; } = null!;
+    [NotMapped]
+    public string FullName=> $"{FirstName}' '{MiddleName}'' {LastName} ";
 
     public string EmployeeRin { get; set; } = null!;
 

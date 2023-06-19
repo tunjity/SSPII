@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Login\CreateAccountStepOne.cshtml" />
+    <Compile Remove="Models\ViewModel\**" />
+    <Content Remove="Models\ViewModel\**" />
+    <EmbeddedResource Remove="Models\ViewModel\**" />
+    <None Remove="Models\ViewModel\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="EPPlus" Version="6.2.4" />
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+    <PackageReference Include="Grpc.Core" Version="2.46.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
       <PrivateAssets>all</PrivateAssets>
@@ -22,13 +30,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14" />
     <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="21.1.37" />
     <PackageReference Include="Vereyon.Web.FlashMessage" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModel\" />
+    <Folder Include="Document\" />
     <Folder Include="Template\" />
     <Folder Include="wwwroot\NewTemplate\" />
   </ItemGroup>
@@ -39,10 +47,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Login\CreateAccountStepOne.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\Login\CreateAccountStepOne.cshtml" />
   </ItemGroup>
 
 </Project>
