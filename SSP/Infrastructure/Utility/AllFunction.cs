@@ -23,6 +23,6 @@ namespace SSP.Infrastructure.Utility
         }
     }
 
-    public class AllYear { public string YearId { get; set; }public string YearValue { get; set; }}
+    public class SelectForDropdown { public string Id { get; set; }public string Value { get; set; }}
 
 }

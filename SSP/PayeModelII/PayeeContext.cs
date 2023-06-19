@@ -184,7 +184,7 @@ public partial class PayeeContext : DbContext
 
     public virtual DbSet<SalaryBreakup> SalaryBreakups { get; set; }
 
-    public virtual DbSet<CreateSingleEmployeeModel> CreateSingleEmployeeModels { get; set; }
+    //public virtual DbSet<CreateSingleEmployeeModel> CreateSingleEmployeeModels { get; set; }
     public virtual DbSet<SalaryTypeMaster> SalaryTypeMasters { get; set; }
 
     public virtual DbSet<ScheduleComment> ScheduleComments { get; set; }

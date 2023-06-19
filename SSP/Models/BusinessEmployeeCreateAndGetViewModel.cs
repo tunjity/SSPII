@@ -13,8 +13,7 @@ namespace SSP.Models
 
     public class CreateSingleEmployeeModel
     {
-        [Key]
-        public int Title { get; set; }
+        public string Title { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string OtherName { get; set; }
@@ -37,7 +36,7 @@ namespace SSP.Models
         public double NHF { get; set; }
         public double NHIS { get; set; }
         public double LifeAssurance { get; set; }
-        public int StartMonth { get; set; }
+        public string StartMonth { get; set; }
         public string Nationality { get; set; } 
     }
     public class ExcelModel

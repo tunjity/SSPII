@@ -4,27 +4,18 @@ using SSP.Infrastructure;
 using SSP.PayeModelII;
 using SSP.Models;
 using SSP.Infrastructure.Utility;
-using Grpc.Core;
-using Microsoft.AspNetCore.Http;
-using System.Configuration;
-using Microsoft.Extensions.Hosting;
-using Syncfusion.EJ2.Inputs;
 using System.Data;
 using Exception = System.Exception;
 using ExcelDataReader;
 using static SSP.Models.APIResponse.Response;
 using Newtonsoft.Json;
-using NuGet.Common;
-using System.Net;
-using System;
 using OfficeOpenXml;
-using System.Threading;
 using SSP.Models.Validators;
 using SSP.Models.CreationModel;
-using SSP.EIRSModel;
 using System.Net.Http.Headers;
 using System.Text;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SSP.Controllers.MonthlyRemitance
 {
@@ -43,14 +34,14 @@ namespace SSP.Controllers.MonthlyRemitance
         }
         public IActionResult Index()
         {
-            var yrs = new List<AllYear>();
+            var yrs = new List<SelectForDropdown>();
             var last10Years = from n in Enumerable.Range(0, 10)
                               select DateTime.Now.Year - n;
             foreach (var year in last10Years)
             {
-                AllYear yr = new AllYear();
-                yr.YearValue = year.ToString();
-                yr.YearId = year.ToString();
+                SelectForDropdown yr = new SelectForDropdown();
+                yr.Value = year.ToString();
+                yr.Id = year.ToString();
                 yrs.Add(yr);
             }
             BusinessEmployeeCreateAndGetViewModel mymodel = new BusinessEmployeeCreateAndGetViewModel();
@@ -60,7 +51,7 @@ namespace SSP.Controllers.MonthlyRemitance
                 string rin = HttpContext.Session.GetString("rin").ToString();
                 var resp = _allRawSql.GetAssociateBusinessbyRin(rin);
                 ViewBag.Upshow = "0";
-                ViewBag.Year = yrs.ToSelectList(nameof(AllYear.YearId), nameof(AllYear.YearValue));
+                ViewBag.Year = yrs.ToSelectList(nameof(SelectForDropdown.Id), nameof(SelectForDropdown.Value));
                 ViewBag.CompRin = resp.ToSelectList(nameof(AssetTaxPayerDetailsApi.AssetName), nameof(AssetTaxPayerDetailsApi.AssetRin));
 
                 mymodel.empList = response;
@@ -71,14 +62,14 @@ namespace SSP.Controllers.MonthlyRemitance
         [HttpPost]
         public IActionResult Index(BusinessEmployeeCreateAndGetViewModel filter)
         {
-            var yrs = new List<AllYear>();
+            var yrs = new List<SelectForDropdown>();
             var last10Years = from n in Enumerable.Range(0, 10)
                               select DateTime.Now.Year - n;
             foreach (var year in last10Years)
             {
-                AllYear yr = new AllYear();
-                yr.YearValue = year.ToString();
-                yr.YearId = year.ToString();
+                SelectForDropdown yr = new SelectForDropdown();
+                yr.Value = year.ToString();
+                yr.Id = year.ToString();
                 yrs.Add(yr);
             }
             BusinessEmployeeCreateAndGetViewModel mymodel = new BusinessEmployeeCreateAndGetViewModel();
@@ -88,7 +79,7 @@ namespace SSP.Controllers.MonthlyRemitance
                 string rin = HttpContext.Session.GetString("rin").ToString();
                 string id = HttpContext.Session.GetString("id").ToString();
                 var resp = _allRawSql.GetAssociateBusinessbyRin(rin);
-                ViewBag.Year = yrs.ToSelectList(nameof(AllYear.YearId), nameof(AllYear.YearValue));
+                ViewBag.Year = yrs.ToSelectList(nameof(SelectForDropdown.Id), nameof(SelectForDropdown.Value));
                 ViewBag.CompRin = resp.ToSelectList(nameof(AssetTaxPayerDetailsApi.AssetRin), nameof(AssetTaxPayerDetailsApi.AssetName));
 
                 if ((filter.employeeBusinessFilter.Year == null) && (filter.employeeBusinessFilter.CompRin == null))
@@ -251,6 +242,20 @@ namespace SSP.Controllers.MonthlyRemitance
         [HttpGet]
         public ActionResult Add()
         {
+            List<EIRSModel.Title> titles = new List<EIRSModel.Title>();
+            List<SelectForDropdown> months = new List<SelectForDropdown>();
+            string titleList = HttpContext.Session.GetString("titleItems");
+            titles = JsonConvert.DeserializeObject<List<EIRSModel.Title>>(titleList);
+            ViewBag.Title = titles.ToSelectList(nameof(EIRSModel.Title.TitleName), nameof(EIRSModel.Title.TitleName));
+
+            var mths = Enumerable.Range(1, 12).Select(i => new
+            {
+                A = i,
+                B = DateTimeFormatInfo.CurrentInfo.GetMonthName(i)
+            });
+            foreach(var item in mths)
+                months.Add(new SelectForDropdown { Id = item.A.ToString(), Value = item.B.ToString() });
+            ViewBag.StartMonth = months.ToSelectList(nameof(SelectForDropdown.Value), nameof(SelectForDropdown.Value));
             return View();
         }
         [HttpPost]

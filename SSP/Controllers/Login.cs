@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -13,6 +14,7 @@ using System.Text;
 using Vereyon.Web;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using TaxPayerType = SSP.EIRSModel.TaxPayerType;
+using Title = SSP.EIRSModel.Title;
 
 namespace SSP.Controllers
 {
@@ -33,7 +35,7 @@ namespace SSP.Controllers
         [HttpGet]
         public ActionResult SignIn()
         {
-            
+
             var getTaxpayertype = _db.TaxPayerTypes.ToList();
             ViewBag.TaxPayerTypeList = getTaxpayertype.ToSelectList(nameof(TaxPayerType.TaxPayerTypeName), nameof(TaxPayerType.TaxPayerTypeName));
 
@@ -62,11 +64,13 @@ namespace SSP.Controllers
             }
             Company eirsUser = new Company();
             var ret = _db.Companies.FirstOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.MobileNumber1 == model.PhoneNumber_RIN.ToString().Trim()));
-
+            var itemsList = _db.Titles.ToList();
             if (ret != null)
             {
                 if (BCrypt.Net.BCrypt.Verify(model.Password, ret.Password))
                 {
+                    string itm = JsonConvert.SerializeObject(itemsList);
+                    HttpContext.Session.SetString("titleItems", itm);
                     HttpContext.Session.SetString("username", ret.CompanyName.ToString());
                     HttpContext.Session.SetString("rin", ret.CompanyRin.ToString());
                     HttpContext.Session.SetString("id", ret.CompanyId.ToString());
@@ -214,7 +218,7 @@ namespace SSP.Controllers
             string? SmsBaseUrl = config.GetConnectionString("SmsBaseUrl");
             string? username = config.GetConnectionString("username");
             string? password = config.GetConnectionString("password");
-            
+
             Random r = new Random();
             var x = r.Next(0, 1000000);
             string s = x.ToString("000000");
@@ -258,7 +262,7 @@ namespace SSP.Controllers
             company.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
             //get records
-            var formalRecord =_db.Companies.FirstOrDefault(x => x.CompanyId == company.CompanyId);
+            var formalRecord = _db.Companies.FirstOrDefault(x => x.CompanyId == company.CompanyId);
             formalRecord.Password = company.Password;
             formalRecord.VerificationOtp = company.VerificationOtp;
             //_db.Update(company);
