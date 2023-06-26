@@ -246,7 +246,7 @@ namespace SSP.Controllers.MonthlyRemitance
             List<SelectForDropdown> months = new List<SelectForDropdown>();
             string titleList = HttpContext.Session.GetString("titleItems");
             titles = JsonConvert.DeserializeObject<List<EIRSModel.Title>>(titleList);
-            ViewBag.Title = titles.ToSelectList(nameof(EIRSModel.Title.TitleName), nameof(EIRSModel.Title.TitleName));
+            ViewBag.Title  = titles.ToSelectList(nameof(EIRSModel.Title.TitleName), nameof(EIRSModel.Title.TitleId));
 
             var mths = Enumerable.Range(1, 12).Select(i => new
             {
@@ -255,11 +255,11 @@ namespace SSP.Controllers.MonthlyRemitance
             });
             foreach(var item in mths)
                 months.Add(new SelectForDropdown { Id = item.A.ToString(), Value = item.B.ToString() });
-            ViewBag.StartMonth = months.ToSelectList(nameof(SelectForDropdown.Value), nameof(SelectForDropdown.Value));
+            ViewBag.StartMonth = months.ToSelectList(nameof(SelectForDropdown.Value), nameof(SelectForDropdown.Id));
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> Add(CreateSingleEmployeeModel file)
+        public async Task<ActionResult> Add(CreateSingleEmployeeModel obj)
         {
             string msg,rin, totalMsg = "";
             var saveTOApi = new Receiver();
@@ -269,9 +269,9 @@ namespace SSP.Controllers.MonthlyRemitance
                 {
                     rin = HttpContext.Session.GetString("rin").ToString();
                     string compId = HttpContext.Session.GetString("id").ToString();
-                    AllValidator name = new AllValidator { FirstName = file.FirstName, SurName = file.Surname };
-                    RTNValidator rTN = new RTNValidator { TIN = file.TIN, Phone = file.PhoneNumber, RIN = file.RIN };
-                    FeesValidator fees = new FeesValidator { Basic = file.BasicIncome.ToString(), Rent = file.Rent.ToString(), LTG =file.LifeAssurance.ToString(), Meal = null, Others = file.OtherIncome.ToString(), Utility = null, Transport = file.Transport.ToString() };
+                    AllValidator name = new AllValidator { FirstName = obj.FirstName, SurName = obj.Surname };
+                    RTNValidator rTN = new RTNValidator { TIN = obj.TIN, Phone = obj.PhoneNumber, RIN = obj.RIN };
+                    FeesValidator fees = new FeesValidator { Basic = obj.BasicIncome.ToString(), Rent = obj.Rent.ToString(), LTG =obj.LifeAssurance.ToString(), Meal = null, Others = obj.OtherIncome.ToString(), Utility = null, Transport = obj.Transport.ToString() };
                     if ((!nameDet(name)) || (!rtnDet(rTN)) || (!feesDet(fees)))
                     {
                         msg = $"user not added because firstname or surname or phone_number or RIN or TIN is null";
@@ -283,12 +283,12 @@ namespace SSP.Controllers.MonthlyRemitance
                         {
                             TaxPayerTypeID = 1,
                             GenderID = 1,
-                            TitleID = file.Title,
-                            FirstName = file.FirstName,
+                            TitleID = Convert.ToInt32(obj.Title),
+                            FirstName = obj.FirstName,
                             MiddleName = "",
                             DOB = "01/01/2004",
-                            TIN = file.TIN,
-                            MobileNumber1 = file.PhoneNumber,
+                            TIN = obj.TIN,
+                            MobileNumber1 = obj.PhoneNumber,
                             EmailAddress1 = "abc@gmail.com",
                             BiometricDetails = "",
                             TaxOfficeID = 34,
@@ -297,10 +297,10 @@ namespace SSP.Controllers.MonthlyRemitance
                             EconomicActivitiesID = 13,
                             NotificationMethodID = 3,
                             ContactAddress = "None Listed",
-                            LastName = file.Surname,
+                            LastName = obj.Surname,
                         };
 
-                        saveTOApi = await CallConfirmationAPIAsync(file.RIN, file.PhoneNumber, file.TIN, "1", individualAPI);
+                        saveTOApi = await CallConfirmationAPIAsync(obj.RIN, obj.PhoneNumber, obj.TIN, "1", individualAPI);
                         if (saveTOApi.Result != null)
                         {
                             saveTOApi = await CallConfirmationAPIAsync("", "", "", "2", individualAPI);
@@ -311,7 +311,7 @@ namespace SSP.Controllers.MonthlyRemitance
                             FirstName = individualAPI.FirstName,
                             LastName = individualAPI.LastName,
                             EmailAddress = individualAPI.EmailAddress1,
-                            EmployeeRin = file.RIN,
+                            EmployeeRin = obj.RIN,
                             IndividualId = saveTOApi.Result.TaxPayerID.ToString(),
                             Tin = individualAPI.TIN,
                             TaxOffice = individualAPI.TaxOfficeID.ToString()
@@ -319,16 +319,16 @@ namespace SSP.Controllers.MonthlyRemitance
                         _repo.Insert(businessEmployee);
                         EmployeesMonthlyIncome employeesMonthlyIncome = new EmployeesMonthlyIncome
                         {
-                            Rent = Convert.ToDouble(file.Rent),
-                            Basic = Convert.ToDouble(file.BasicIncome),
-                            Transport = Convert.ToDouble(file.Transport),
-                            Ltg = Convert.ToDouble(file.LifeAssurance),
+                            Rent = Convert.ToDouble(obj.Rent),
+                            Basic = Convert.ToDouble(obj.BasicIncome),
+                            Transport = Convert.ToDouble(obj.Transport),
+                            Ltg = Convert.ToDouble(obj.LifeAssurance),
                             Utility = 0.00,
                             Meal = 0.00,
-                            Others = Convert.ToDouble(file.OtherIncome),
-                            Nhf = Convert.ToDouble(file.NHF),
-                            Nhis = Convert.ToDouble(file.NHIS),
-                            Pension = Convert.ToDouble(file.Pension),
+                            Others = Convert.ToDouble(obj.OtherIncome),
+                            Nhf = Convert.ToDouble(obj.NHF),
+                            Nhis = Convert.ToDouble(obj.NHIS),
+                            Pension = Convert.ToDouble(obj.Pension),
                             EmployeeId = businessEmployee.Id,
                             CompanyId = Convert.ToInt32(compId)
                         };

@@ -6,143 +6,157 @@
 }
 
 <h2>Create Business Employee</h2>
-<section class="vh-100">
-    <div class="container-fluid h-custom">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="/images/img.jpg"
-                     class="img-fluid" alt="Sample image">
+<div class="container">
+    @using (Html.BeginForm("Add", "Employee", FormMethod.Post))
+    {
+        <form name="myForm" onsubmit="return validateForm()">
+            <!-- Select input -->
+        @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-6">
+                   @* <div class="form-group">
+                        <strong> Select Title :</strong><br />
+                        @Html.DropDownListFor(model => model.Title,ViewBag.Title as SelectList,  "Select Title",  new { @class = "form-control bs-select", @tabindex = "1", @data_live_search = "true", @id = "cboFromTitle" })
+                        @Html.ValidationMessageFor(model => model.Title, "", htmlAttributes: new { @class = "help-block" })
+                    </div>*@
+                    <div class="form-group">
+                        <strong> FirstName :</strong><br />
+                        @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter First Name" })
+                        @Html.ValidationMessageFor(Model => Model.FirstName, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> Surname :</strong><br />
+                        @Html.TextBoxFor(Model => Model.Surname, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter SurName" })
+                        @Html.ValidationMessageFor(Model => Model.Surname, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> OtherName :</strong><br />
+                        @Html.TextBoxFor(Model => Model.OtherName, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Other Name" })
+                        @Html.ValidationMessageFor(Model => Model.OtherName, "", new { @class = "help-block" })
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong> PhoneNumber :</strong><br />
+                        @Html.TextBoxFor(Model => Model.PhoneNumber, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter PhoneNumber" })
+                        @Html.ValidationMessageFor(Model => Model.PhoneNumber, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> EmailAddress :</strong><br />
+                        @Html.TextBoxFor(Model => Model.EmailAddress, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter EmailAddress" })
+                        @Html.ValidationMessageFor(Model => Model.EmailAddress, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> BVN :</strong><br />
+                        @Html.TextBoxFor(Model => Model.BVN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter BVN" })
+                        @Html.ValidationMessageFor(Model => Model.BVN, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> TIN :</strong><br />
+                        @Html.TextBoxFor(Model => Model.TIN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter TIN" })
+                        @Html.ValidationMessageFor(Model => Model.TIN, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> RIN :</strong><br />
+                        @Html.TextBoxFor(Model => Model.RIN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter RIN" })
+                        @Html.ValidationMessageFor(Model => Model.RIN, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> NIN :</strong><br />
+                        @Html.TextBoxFor(Model => Model.NIN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter NIN" })
+                        @Html.ValidationMessageFor(Model => Model.NIN, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> LGA :</strong><br />
+                        @Html.TextBoxFor(Model => Model.LGA, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter LGA" })
+                        @Html.ValidationMessageFor(Model => Model.LGA, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> Designation :</strong><br />
+                        @Html.TextBoxFor(Model => Model.Designation, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Designation" })
+                        @Html.ValidationMessageFor(Model => Model.Designation, "", new { @class = "help-block" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <strong> ZipCode :</strong><br />
+                        @Html.TextBoxFor(Model => Model.ZipCode, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Zip Code" })
+                        @Html.ValidationMessageFor(Model => Model.ZipCode, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> BasicIncome :</strong><br />
+                        @Html.TextBoxFor(Model => Model.BasicIncome, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter BasicIncome" })
+                        @Html.ValidationMessageFor(Model => Model.BasicIncome, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> Rent :</strong><br />
+                        @Html.TextBoxFor(Model => Model.Rent, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Rent" })
+                        @Html.ValidationMessageFor(Model => Model.Rent, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> Transport :</strong><br />
+                        @Html.TextBoxFor(Model => Model.Transport, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Transport" })
+                        @Html.ValidationMessageFor(Model => Model.Transport, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> OtherIncome :</strong><br />
+                        @Html.TextBoxFor(Model => Model.OtherIncome, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter OtherIncome" })
+                        @Html.ValidationMessageFor(Model => Model.OtherIncome, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> TotalIncome :</strong><br />
+                        @Html.TextBoxFor(Model => Model.TotalIncome, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Total Income" })
+                        @Html.ValidationMessageFor(Model => Model.TotalIncome, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> Pension :</strong><br />
+                        @Html.TextBoxFor(Model => Model.Pension, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Pension" })
+                        @Html.ValidationMessageFor(Model => Model.Pension, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> NHF :</strong><br />
+                        @Html.TextBoxFor(Model => Model.NHF, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter NHF" })
+                        @Html.ValidationMessageFor(Model => Model.NHF, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> NHIS :</strong><br />
+                        @Html.TextBoxFor(Model => Model.NHIS, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter NHIS" })
+                        @Html.ValidationMessageFor(Model => Model.NHIS, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> LifeAssurance :</strong><br />
+                        @Html.TextBoxFor(Model => Model.LifeAssurance, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter LifeAssurance" })
+                        @Html.ValidationMessageFor(Model => Model.LifeAssurance, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> Nationality :</strong><br />
+                        @Html.TextBoxFor(Model => Model.Nationality, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Nationality" })
+                        @Html.ValidationMessageFor(Model => Model.Nationality, "", new { @class = "help-block" })
+                    </div>
+                    <div class="form-group">
+                        <strong> Select StartMonth :</strong><br />
+                        @Html.DropDownListFor(model => model.StartMonth,ViewBag.StartMonth as SelectList,  "Select Month",  new { @class = "form-control bs-select", @tabindex = "1", @data_live_search = "true", @id = "cboFromMonths" })
+                        @Html.ValidationMessageFor(model => model.StartMonth, "", htmlAttributes: new { @class = "help-block" })
+                    </div>
+                </div>
             </div>
-            <div>
-                @using (Html.BeginForm("Add", "Employee", FormMethod.Post))
-                {
-                    <form name="myForm" onsubmit="return validateForm()">
-                        <!-- Select input -->
-                    @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
-                        <div class="form-group">
-                            <strong> Select Title :</strong><br />
-                            @Html.DropDownListFor(model => model.Title,ViewBag.Title as SelectList,  "Select Title",  new { @class = "form-control bs-select", @tabindex = "1", @data_live_search = "true", @id = "cboFromTitle" })
-                            @Html.ValidationMessageFor(model => model.Title, "", htmlAttributes: new { @class = "help-block" })
-                        </div>
-                        <div class="form-group">
-                            <strong> FirstName :</strong><br />
-                            @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter First Name" })
-                            @Html.ValidationMessageFor(Model => Model.FirstName, "", new { @class = "help-block" })
-                        </div>
-                        <div class="form-group">
-                            <strong> Surname :</strong><br />
-                            @Html.TextBoxFor(Model => Model.Surname, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter SurName" })
-                            @Html.ValidationMessageFor(Model => Model.Surname, "", new { @class = "help-block" })
-                        </div>
-                        <div class="form-group">
-                            <strong> OtherName :</strong><br />
-                            @Html.TextBoxFor(Model => Model.OtherName, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Other Name" })
-                            @Html.ValidationMessageFor(Model => Model.OtherName, "", new { @class = "help-block" })
-                        </div>
-                        <div class="form-group">
-                            <strong> HomeAddress :</strong><br />
-                            @Html.TextBoxFor(Model => Model.HomeAddress, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Home Address" })
-                            @Html.ValidationMessageFor(Model => Model.HomeAddress, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> PhoneNumber :</strong><br />
-                            @Html.TextBoxFor(Model => Model.PhoneNumber, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter PhoneNumber" })
-                            @Html.ValidationMessageFor(Model => Model.PhoneNumber, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> EmailAddress :</strong><br />
-                            @Html.TextBoxFor(Model => Model.EmailAddress, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter EmailAddress" })
-                            @Html.ValidationMessageFor(Model => Model.EmailAddress, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> BVN :</strong><br />
-                            @Html.TextBoxFor(Model => Model.BVN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter BVN" })
-                            @Html.ValidationMessageFor(Model => Model.BVN, "", new { @class = "help-block" })
-                        </div>
-                        <div class="form-group">
-                            <strong> TIN :</strong><br />
-                            @Html.TextBoxFor(Model => Model.TIN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter TIN" })
-                            @Html.ValidationMessageFor(Model => Model.TIN, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> RIN :</strong><br />
-                            @Html.TextBoxFor(Model => Model.RIN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter RIN" })
-                            @Html.ValidationMessageFor(Model => Model.RIN, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> NIN :</strong><br />
-                            @Html.TextBoxFor(Model => Model.NIN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter NIN" })
-                            @Html.ValidationMessageFor(Model => Model.NIN, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> LGA :</strong><br />
-                            @Html.TextBoxFor(Model => Model.LGA, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter LGA" })
-                            @Html.ValidationMessageFor(Model => Model.LGA, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> Designation :</strong><br />
-                            @Html.TextBoxFor(Model => Model.Designation, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Designation" })
-                            @Html.ValidationMessageFor(Model => Model.Designation, "", new { @class = "help-block" })
-                        </div>
-                        <div class="form-group">
-                            <strong> ZipCode :</strong><br />
-                            @Html.TextBoxFor(Model => Model.ZipCode, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Zip Code" })
-                            @Html.ValidationMessageFor(Model => Model.ZipCode, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> BasicIncome :</strong><br />
-                            @Html.TextBoxFor(Model => Model.BasicIncome, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter BasicIncome" })
-                            @Html.ValidationMessageFor(Model => Model.BasicIncome, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> Rent :</strong><br />
-                            @Html.TextBoxFor(Model => Model.Rent, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Rent" })
-                            @Html.ValidationMessageFor(Model => Model.Rent, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> Transport :</strong><br />
-                            @Html.TextBoxFor(Model => Model.Transport, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Transport" })
-                            @Html.ValidationMessageFor(Model => Model.Transport, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> OtherIncome :</strong><br />
-                            @Html.TextBoxFor(Model => Model.OtherIncome, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter OtherIncome" })
-                            @Html.ValidationMessageFor(Model => Model.OtherIncome, "", new { @class = "help-block" })
-                        </div>
-                           <div class="form-group">
-                            <strong> TotalIncome :</strong><br />
-                            @Html.TextBoxFor(Model => Model.TotalIncome, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Total Income" })
-                            @Html.ValidationMessageFor(Model => Model.TotalIncome, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> Pension :</strong><br />
-                            @Html.TextBoxFor(Model => Model.Pension, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Pension" })
-                            @Html.ValidationMessageFor(Model => Model.Pension, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> NHF :</strong><br />
-                            @Html.TextBoxFor(Model => Model.NHF, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter NHF" })
-                            @Html.ValidationMessageFor(Model => Model.NHF, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> NHIS :</strong><br />
-                            @Html.TextBoxFor(Model => Model.NHIS, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter NHIS" })
-                            @Html.ValidationMessageFor(Model => Model.NHIS, "", new { @class = "help-block" })
-                        </div>    <div class="form-group">
-                            <strong> LifeAssurance :</strong><br />
-                            @Html.TextBoxFor(Model => Model.LifeAssurance, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter LifeAssurance" })
-                            @Html.ValidationMessageFor(Model => Model.LifeAssurance, "", new { @class = "help-block" })
-                        </div>  <div class="form-group">
-                            <strong> Nationality :</strong><br />
-                            @Html.TextBoxFor(Model => Model.Nationality, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Nationality" })
-                            @Html.ValidationMessageFor(Model => Model.Nationality, "", new { @class = "help-block" })
-                        </div>    
-                        <div class="form-group">
-                            <strong> Select StartMonth :</strong><br />
-                            @Html.DropDownListFor(model => model.Title,ViewBag.StartMonth as SelectList,  "Select Month",  new { @class = "form-control bs-select", @tabindex = "1", @data_live_search = "true", @id = "cboFromMonths" })
-                            @Html.ValidationMessageFor(model => model.StartMonth, "", htmlAttributes: new { @class = "help-block" })
-                        </div>
-                        <div class="text-center text-lg-start mt-4 pt-2">
-                            <div class="d-grid gap-2 col-6 mx-auto">
-
-                                <button class="btn text-white" type="submit" style="padding-left: 2.5rem; padding-right: 2.5rem; border-radius: 30px; background-color: #4CAF50 !important;">Continue</button>
-
-
-                            </div>
-                        </div>
-
-                    </form>
-                }
+            <div class="form-group">
+                <strong> HomeAddress :</strong><br />
+                @Html.TextBoxFor(Model => Model.HomeAddress, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter Home Address" })
+                @Html.ValidationMessageFor(Model => Model.HomeAddress, "", new { @class = "help-block" })
             </div>
-        </div>
+            <div class="text-center text-lg-start mt-4 pt-2">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn text-white" type="submit" style="padding-left: 2.5rem; padding-right: 2.5rem; border-radius: 30px; background-color: #4CAF50 !important;">Continue</button>
+
+                </div>
+            </div>
+        </form>
+    }
+
+</div>
     </div>
-</section>
+</div>
 
 
