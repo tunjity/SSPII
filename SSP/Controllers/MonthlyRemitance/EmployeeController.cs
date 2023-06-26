@@ -89,8 +89,8 @@ namespace SSP.Controllers.MonthlyRemitance
                 else
                 {
                     ViewBag.Upshow = "1";
-
-                    response = _repository.GetById(id).ToList();
+                   // int newId = Convert.ToInt32(id);
+                    response = _repository.GetAll().Where(o=>o.CompanyId.ToString() == id).ToList();
                 }
                 mymodel.empList = response;
 
