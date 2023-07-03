@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSP.PayeModelII;
 
@@ -26,8 +27,8 @@ public partial class CompanyListApi
     public string? Tin { get; set; }
 
     public string? TaxOffice { get; set; }
-
-    public int CompanyListId { get; set; }
+    //[NotMapped]
+    //public int CompanyListId { get; set; }
 
     public DateTime? DateCreated { get; set; }
 
@@ -35,5 +36,5 @@ public partial class CompanyListApi
 
     public virtual ICollection<EmployeesMonthlyIncome> EmployeesMonthlyIncomes { get; } = new List<EmployeesMonthlyIncome>();
 
-    public virtual ICollection<EmployeesMonthlySchedule> EmployeesMonthlySchedules { get; } = new List<EmployeesMonthlySchedule>();
+   // public virtual ICollection<EmployeesMonthlySchedule> EmployeesMonthlySchedules { get; } = new List<EmployeesMonthlySchedule>();
 }

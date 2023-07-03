@@ -3,7 +3,12 @@
     Layout = "~/Views/Shared/_AppLayout.cshtml";
     string kkk = ViewBag.tempMsg;
 }
-
+@if (TempData["UploadAlertMessage"].ToString().Contains("Error"))
+{
+    <div class="alert alert-danger">
+        <strong>An Error Occur !</strong> @TempData["AlertMessage"]
+    </div>
+}
 <div class="card-body">
     <div>
         <p>@kkk</p>

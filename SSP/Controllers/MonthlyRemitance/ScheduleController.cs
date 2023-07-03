@@ -18,12 +18,14 @@ namespace SSP.Controllers.MonthlyRemitance
         private IEmployeeRepository _repo;
         private IAllRawSql _allRawSql;
         private IConfiguration configuration;
+        private PayeeContext _context;
         IExcelDataReader reader;
         public ScheduleController(IConfiguration iConfig)
         {
             configuration = iConfig;
             _repository = new EmployeesMonthlyScheduleRepository();
             _allRawSql = new AllRawSql();
+            _context = new PayeeContext();
         }
         public IActionResult Index()
         {
@@ -50,7 +52,7 @@ namespace SSP.Controllers.MonthlyRemitance
             ViewBag.Year = yrs.ToSelectList(nameof(SelectForDropdown.Id), nameof(SelectForDropdown.Value));
             ViewBag.Months = mths.ToSelectList(nameof(SelectForDropdown.Value), nameof(SelectForDropdown.Id));
             string itm = JsonConvert.SerializeObject(mths);
-            HttpContext.Session.SetString("mthsItems", itm);          
+            HttpContext.Session.SetString("mthsItems", itm);
             string yrItm = JsonConvert.SerializeObject(yrs);
             HttpContext.Session.SetString("yrItms", yrItm);
 
@@ -62,14 +64,14 @@ namespace SSP.Controllers.MonthlyRemitance
         {
             string mthsList = HttpContext.Session.GetString("mthsItems");
             var mths = JsonConvert.DeserializeObject<List<SelectForDropdown>>(mthsList);
-            ViewBag.Months = mths.ToSelectList(nameof(SelectForDropdown.Value), nameof(SelectForDropdown.Id)); 
-            
+            ViewBag.Months = mths.ToSelectList(nameof(SelectForDropdown.Value), nameof(SelectForDropdown.Id));
+
             string yrList = HttpContext.Session.GetString("yrItms");
             var yrs = JsonConvert.DeserializeObject<List<SelectForDropdown>>(yrList);
             ViewBag.Year = yrs.ToSelectList(nameof(SelectForDropdown.Id), nameof(SelectForDropdown.Value));
-           
-           // BusinessEmployeeCreateAndGetViewModel mymodel = new BusinessEmployeeCreateAndGetViewModel();
-           EmployeesMonthlySchedule response = new EmployeesMonthlySchedule();
+
+            // BusinessEmployeeCreateAndGetViewModel mymodel = new BusinessEmployeeCreateAndGetViewModel();
+            EmployeesMonthlySchedule response = new EmployeesMonthlySchedule();
             if (HttpContext.Session.GetString("rin") != null)
             {
                 string rin = HttpContext.Session.GetString("rin").ToString();
@@ -85,15 +87,12 @@ namespace SSP.Controllers.MonthlyRemitance
                 else
                 {
                     ViewBag.Upshow = "1";
-
                     response =  _repository.GetAll().Where(o=>o.CompanyId.ToString() == id && o.Year.ToString() == filter.employeeBusinessFilter.Year && o.Month.ToString() == filter.employeeBusinessFilter.Months).FirstOrDefault();
                 }
-               // mymodel.empList = response;
-
                 return View(response);
             }
             return RedirectToAction("Login", "SignIn");
         }
-      
+
     }
 }

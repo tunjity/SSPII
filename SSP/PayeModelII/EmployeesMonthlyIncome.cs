@@ -39,12 +39,12 @@ public partial class EmployeesMonthlyIncome
     public double TotalRelief { get; set; }
 
     public double LifeAssurance { get; set; }
-
+    [NotMapped]
     public virtual Business Business { get; set; } = null!;
-
+    [NotMapped]
     public virtual CompanyListApi Company { get; set; } = null!;
-
+    [NotMapped]
     public virtual Employee Employee { get; set; } = null!;
-
+    [NotMapped]
     public virtual EmployeesMonthlySchedule? EmployeesMonthlySchedule { get; set; }
 }

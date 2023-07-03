@@ -23,6 +23,7 @@ namespace SSP.Controllers.MonthlyRemitance
     {
         private IEmployeesMonthlyIncomeRepository _repository;
         private IEmployeeRepository _repo;
+        private PayeeContext _context;
         private IAllRawSql _allRawSql;
         private IConfiguration configuration;
         IExcelDataReader reader;
@@ -31,6 +32,7 @@ namespace SSP.Controllers.MonthlyRemitance
             configuration = iConfig;
             _repository = new EmployeesMonthlyIncomeRepository();
             _allRawSql = new AllRawSql();
+            _context = new PayeeContext();
         }
         public IActionResult Index()
         {
@@ -89,8 +91,8 @@ namespace SSP.Controllers.MonthlyRemitance
                 else
                 {
                     ViewBag.Upshow = "1";
-                   // int newId = Convert.ToInt32(id);
-                    response = _repository.GetAll().Where(o=>o.CompanyId.ToString() == id).ToList();
+                    // int newId = Convert.ToInt32(id);
+                    response = _repository.GetAll().Where(o => o.CompanyId.ToString() == id).ToList();
                 }
                 mymodel.empList = response;
 
@@ -101,6 +103,7 @@ namespace SSP.Controllers.MonthlyRemitance
         [HttpGet]
         public ActionResult Upload()
         {
+            TempData["UploadAlertMessage"] = "";
             return View();
         }
         [HttpPost]
@@ -151,6 +154,7 @@ namespace SSP.Controllers.MonthlyRemitance
                             ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
                             var rowCount = worksheet.Dimension.Rows;
                             employees = GetListFromExcel<ExcelModel>(worksheet);
+                            employees = employees.Where(o => !string.IsNullOrEmpty(o.employer_name)).ToList(); 
                         }
                         for (int i = 0; i < employees.Count; i++)
                         {
@@ -185,22 +189,28 @@ namespace SSP.Controllers.MonthlyRemitance
                                     LastName = employees[i].surname,
                                 };
                                 saveTOApi = await CallConfirmationAPIAsync(employees[i].employee_rin, employees[i].employee_phone, employees[i].employee_tin, "1", individualAPI);
-                                if (saveTOApi.Result != null)
+                                if (saveTOApi.Result.Count == 0)
                                 {
                                     saveTOApi = await CallConfirmationAPIAsync("", "", "", "2", individualAPI);
                                 }
+                                if (saveTOApi.Success == false)
+                                {
+                                    TempData["UploadAlertMessage"] = "Error From ERAS API";
+                                    return RedirectToAction("Upload", "Employee");
+                                }
                                 Employee businessEmployee = new Employee
                                 {
-                                    EmployeeId = Convert.ToInt32(saveTOApi.Result.TaxPayerID),
+                                    EmployeeId = Convert.ToInt32(saveTOApi.Result.FirstOrDefault().TaxPayerID),
                                     FirstName = individualAPI.FirstName,
                                     LastName = individualAPI.LastName,
                                     EmailAddress = individualAPI.EmailAddress1,
-                                    EmployeeRin = employees[i].employee_rin,
-                                    IndividualId = saveTOApi.Result.TaxPayerID.ToString(),
+                                    EmployeeRin = String.IsNullOrEmpty(employees[i].employee_rin) ? saveTOApi.Result.FirstOrDefault().TaxPayerRIN: employees[i].employee_rin,
+                                    IndividualId = saveTOApi.Result.FirstOrDefault().TaxPayerID.ToString(),
                                     Tin = individualAPI.TIN,
                                     TaxOffice = individualAPI.TaxOfficeID.ToString()
                                 };
-                                _repo.Insert(businessEmployee);
+                                _context.Employees.Add(businessEmployee);
+                                // _repo.Insert(businessEmployee);
                                 EmployeesMonthlyIncome employeesMonthlyIncome = new EmployeesMonthlyIncome
                                 {
                                     Rent = Convert.ToDouble(employees[i].annual_rent),
@@ -216,10 +226,12 @@ namespace SSP.Controllers.MonthlyRemitance
                                     EmployeeId = businessEmployee.Id,
                                     CompanyId = Convert.ToInt32(compId)
                                 };
-                                _repository.Insert(employeesMonthlyIncome);
+                                _context.EmployeesMonthlyIncomes.Add(employeesMonthlyIncome);
+                                //_repository.Insert(employeesMonthlyIncome);
                             }
 
                         }
+                        _context.SaveChanges();
                     }
 
                     ViewBag.tempMsg = totalMsg;
@@ -246,14 +258,14 @@ namespace SSP.Controllers.MonthlyRemitance
             List<SelectForDropdown> months = new List<SelectForDropdown>();
             string titleList = HttpContext.Session.GetString("titleItems");
             titles = JsonConvert.DeserializeObject<List<EIRSModel.Title>>(titleList);
-            ViewBag.Title  = titles.ToSelectList(nameof(EIRSModel.Title.TitleName), nameof(EIRSModel.Title.TitleId));
+            ViewBag.Title = titles.ToSelectList(nameof(EIRSModel.Title.TitleName), nameof(EIRSModel.Title.TitleId));
 
             var mths = Enumerable.Range(1, 12).Select(i => new
             {
                 A = i,
                 B = DateTimeFormatInfo.CurrentInfo.GetMonthName(i)
             });
-            foreach(var item in mths)
+            foreach (var item in mths)
                 months.Add(new SelectForDropdown { Id = item.A.ToString(), Value = item.B.ToString() });
             ViewBag.StartMonth = months.ToSelectList(nameof(SelectForDropdown.Value), nameof(SelectForDropdown.Id));
             return View();
@@ -261,7 +273,7 @@ namespace SSP.Controllers.MonthlyRemitance
         [HttpPost]
         public async Task<ActionResult> Add(CreateSingleEmployeeModel obj)
         {
-            string msg,rin, totalMsg = "";
+            string msg, rin, totalMsg = "";
             var saveTOApi = new Receiver();
             try
             {
@@ -271,7 +283,7 @@ namespace SSP.Controllers.MonthlyRemitance
                     string compId = HttpContext.Session.GetString("id").ToString();
                     AllValidator name = new AllValidator { FirstName = obj.FirstName, SurName = obj.Surname };
                     RTNValidator rTN = new RTNValidator { TIN = obj.TIN, Phone = obj.PhoneNumber, RIN = obj.RIN };
-                    FeesValidator fees = new FeesValidator { Basic = obj.BasicIncome.ToString(), Rent = obj.Rent.ToString(), LTG =obj.LifeAssurance.ToString(), Meal = null, Others = obj.OtherIncome.ToString(), Utility = null, Transport = obj.Transport.ToString() };
+                    FeesValidator fees = new FeesValidator { Basic = obj.BasicIncome.ToString(), Rent = obj.Rent.ToString(), LTG = obj.LifeAssurance.ToString(), Meal = null, Others = obj.OtherIncome.ToString(), Utility = null, Transport = obj.Transport.ToString() };
                     if ((!nameDet(name)) || (!rtnDet(rTN)) || (!feesDet(fees)))
                     {
                         msg = $"user not added because firstname or surname or phone_number or RIN or TIN is null";
@@ -301,18 +313,18 @@ namespace SSP.Controllers.MonthlyRemitance
                         };
 
                         saveTOApi = await CallConfirmationAPIAsync(obj.RIN, obj.PhoneNumber, obj.TIN, "1", individualAPI);
-                        if (saveTOApi.Result != null)
+                        if (saveTOApi.Result.Count == 0)
                         {
                             saveTOApi = await CallConfirmationAPIAsync("", "", "", "2", individualAPI);
                         }
                         Employee businessEmployee = new Employee
                         {
-                            EmployeeId = Convert.ToInt32(saveTOApi.Result.TaxPayerID),
+                            EmployeeId = Convert.ToInt32(saveTOApi.Result.FirstOrDefault().TaxPayerID),
                             FirstName = individualAPI.FirstName,
                             LastName = individualAPI.LastName,
                             EmailAddress = individualAPI.EmailAddress1,
                             EmployeeRin = obj.RIN,
-                            IndividualId = saveTOApi.Result.TaxPayerID.ToString(),
+                            IndividualId = saveTOApi.Result.FirstOrDefault().TaxPayerID.ToString(),
                             Tin = individualAPI.TIN,
                             TaxOffice = individualAPI.TaxOfficeID.ToString()
                         };
@@ -431,8 +443,8 @@ namespace SSP.Controllers.MonthlyRemitance
             switch (caller)
             {
                 case "1":
-                    if (rin != "") url = url + "TaxPayer/SearchTaxPayerByRIN?TaxPayerRIN=" + rin;
-                    else if (phoneNumber != "") url = url + "TaxPayer/SearchTaxPayerByMobileNumber?MobileNumber=" + phoneNumber;
+                    if (!string.IsNullOrEmpty(rin)) url = url + "TaxPayer/SearchTaxPayerByRIN?TaxPayerRIN=" + rin;
+                    else if (!string.IsNullOrEmpty(phoneNumber)) url = url + "TaxPayer/SearchTaxPayerByMobileNumber?MobileNumber=" + phoneNumber;
                     else
                         url = url + "TaxPayer/SearchTaxPayerByTIN?TaxPayerTIN=" + tin;
 
@@ -442,6 +454,7 @@ namespace SSP.Controllers.MonthlyRemitance
 
                         var result = response.Content.ReadAsStringAsync();
                         string res = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        //var ret = JsonConvert.DeserializeObject<object>(res);
                         respObj = JsonConvert.DeserializeObject<Receiver>(res);
                     }
                     break;

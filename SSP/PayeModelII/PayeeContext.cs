@@ -1750,7 +1750,7 @@ public partial class PayeeContext : DbContext
 
         modelBuilder.Entity<CompanyListApi>(entity =>
         {
-            entity.HasKey(e => e.CompanyListId).IsClustered(false);
+           
 
             entity.ToTable("CompanyList_API");
 
@@ -1758,7 +1758,7 @@ public partial class PayeeContext : DbContext
 
             entity.HasIndex(e => e.TaxPayerRin, "Ind_CompanyList_API");
 
-            entity.Property(e => e.CompanyListId).HasColumnName("CompanyListID");
+
             entity.Property(e => e.ContactAddress)
                 .HasMaxLength(500)
                 .IsUnicode(false);
@@ -2012,15 +2012,6 @@ public partial class PayeeContext : DbContext
             entity.Property(e => e.TaxFreePay).HasColumnName("Tax_Free_Pay");
             entity.Property(e => e.TotalIncome).HasColumnName("Total_Income");
 
-            entity.HasOne(d => d.Company).WithMany(p => p.EmployeesMonthlySchedules)
-                .HasForeignKey(d => d.CompanyId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_EmployeesMonthlySchedule_CompanyList_API");
-
-            entity.HasOne(d => d.Employee).WithOne(p => p.EmployeesMonthlySchedule)
-                .HasForeignKey<EmployeesMonthlySchedule>(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_EmployeesMonthlySchedule_EmployeesMonthlyIncome");
         });
 
         modelBuilder.Entity<EmployerAssessmentOutputFile>(entity =>

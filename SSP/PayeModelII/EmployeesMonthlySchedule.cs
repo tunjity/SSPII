@@ -7,15 +7,15 @@ public partial class EmployeesMonthlySchedule
 {
     public int Id { get; set; }
 
-    public int EmployeeId { get; set; }
+    public string EmployeeId { get; set; }
 
     public int BusinessId { get; set; }
 
-    public int CompanyId { get; set; }
+    public string CompanyId { get; set; }
 
     public int Year { get; set; }
 
-    public int Month { get; set; }
+    public string Month { get; set; }
 
     public int StatusId { get; set; }
 
@@ -47,7 +47,4 @@ public partial class EmployeesMonthlySchedule
 
     public double Tax { get; set; }
 
-    public virtual CompanyListApi Company { get; set; } = null!;
-
-    public virtual EmployeesMonthlyIncome Employee { get; set; } = null!;
 }

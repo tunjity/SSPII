@@ -4,8 +4,9 @@
     {
         public class Receiver
         {
-            public string Success { get; set; }
-            public TaxPayerClassResult Result { get; set; }
+            public bool Success { get; set; }
+            public string Message { get; set; }
+            public List<TaxPayerClassResult> Result { get; set; }
 
         }
         public class TaxPayerClassResult
