@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSP", "SSP\SSP.csproj", "{DD696947-5348-401E-B029-E6FBE0B7A750}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSP", "SSP\SSP.csproj", "{DD696947-5348-401E-B029-E6FBE0B7A750}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSP.Repository", "SSP.Repository\SSP.Repository.csproj", "{0E9C3510-0CFB-44E6-BD35-9B878C219AB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSP.API", "SSP.API\SSP.API.csproj", "{592FD9A8-C97A-46EF-A4E3-F70B45731C52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{DD696947-5348-401E-B029-E6FBE0B7A750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD696947-5348-401E-B029-E6FBE0B7A750}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD696947-5348-401E-B029-E6FBE0B7A750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E9C3510-0CFB-44E6-BD35-9B878C219AB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E9C3510-0CFB-44E6-BD35-9B878C219AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E9C3510-0CFB-44E6-BD35-9B878C219AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E9C3510-0CFB-44E6-BD35-9B878C219AB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{592FD9A8-C97A-46EF-A4E3-F70B45731C52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592FD9A8-C97A-46EF-A4E3-F70B45731C52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592FD9A8-C97A-46EF-A4E3-F70B45731C52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592FD9A8-C97A-46EF-A4E3-F70B45731C52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

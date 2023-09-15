@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SSP.Payee;
+using SSP.Repository.Payee;
 
 #nullable disable
 
@@ -25,7 +25,7 @@ namespace SSP.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SSP.Payee.AddPayeInputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AddPayeInputFile", b =>
                 {
                     b.Property<string>("CompanyRin")
                         .HasMaxLength(200)
@@ -53,7 +53,7 @@ namespace SSP.Migrations
                     b.ToTable("AddPayeInputFile", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Agency", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Agency", b =>
                 {
                     b.Property<int>("AgencyId")
                         .ValueGeneratedOnAdd()
@@ -95,7 +95,7 @@ namespace SSP.Migrations
                     b.ToTable("Agencies");
                 });
 
-            modelBuilder.Entity("SSP.Payee.AgencyType", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AgencyType", b =>
                 {
                     b.Property<int>("AgencyId")
                         .ValueGeneratedOnAdd()
@@ -133,7 +133,7 @@ namespace SSP.Migrations
                     b.ToTable("Agency_Type", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.ApiJsonStr", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.ApiJsonStr", b =>
                 {
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime");
@@ -153,7 +153,7 @@ namespace SSP.Migrations
                     b.ToTable("API_JsonStr", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Assessment", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Assessment", b =>
                 {
                     b.Property<long>("AssessId")
                         .ValueGeneratedOnAdd()
@@ -270,7 +270,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessments");
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentChild", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentChild", b =>
                 {
                     b.Property<decimal?>("Amount")
                         .HasColumnType("numeric(18, 0)");
@@ -317,7 +317,7 @@ namespace SSP.Migrations
                     b.ToTable("AssessmentChild", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentGroup", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentGroup", b =>
                 {
                     b.Property<int>("AssessId")
                         .ValueGeneratedOnAdd()
@@ -359,7 +359,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Groups", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentItem", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentItem", b =>
                 {
                     b.Property<long>("AssessItemId")
                         .ValueGeneratedOnAdd()
@@ -456,7 +456,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Items", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentItemApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentItemApi", b =>
                 {
                     b.Property<int?>("AgencyId")
                         .HasColumnType("int")
@@ -638,7 +638,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Item_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentItemBkApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentItemBkApi", b =>
                 {
                     b.Property<int?>("AgencyId")
                         .HasColumnType("int")
@@ -812,7 +812,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Item_BK_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentItemCategory", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentItemCategory", b =>
                 {
                     b.Property<int>("AssitemId")
                         .ValueGeneratedOnAdd()
@@ -850,7 +850,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Item_Categories", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentItemSubCategory", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentItemSubCategory", b =>
                 {
                     b.Property<int>("ItemCategoryId")
                         .ValueGeneratedOnAdd()
@@ -890,7 +890,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Item_Sub_Category", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentRule", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentRule", b =>
                 {
                     b.Property<int>("AssessRulesId")
                         .ValueGeneratedOnAdd()
@@ -975,7 +975,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Rules", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentRule1", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentRule1", b =>
                 {
                     b.Property<double?>("Active")
                         .HasColumnType("float");
@@ -1020,7 +1020,7 @@ namespace SSP.Migrations
                     b.ToTable("AssessmentRules", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentRuleMasterApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentRuleMasterApi", b =>
                 {
                     b.Property<int?>("Active")
                         .HasColumnType("int");
@@ -1072,7 +1072,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_rule_master_api", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentRulesApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentRulesApi", b =>
                 {
                     b.Property<double?>("AssessmentAmount")
                         .HasColumnType("float");
@@ -1191,7 +1191,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Rules_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentStatus", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentStatus", b =>
                 {
                     b.Property<int>("AssStId")
                         .HasColumnType("int")
@@ -1238,7 +1238,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Status", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentSubGroup", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentSubGroup", b =>
                 {
                     b.Property<int>("AssessId")
                         .ValueGeneratedOnAdd()
@@ -1284,7 +1284,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessment_Sub_Groups", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssessmentsApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssessmentsApi", b =>
                 {
                     b.Property<int>("AssessmentId")
                         .HasColumnType("int")
@@ -1421,7 +1421,7 @@ namespace SSP.Migrations
                     b.ToTable("Assessments_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssetTaxPayerDetailsApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssetTaxPayerDetailsApi", b =>
                 {
                     b.Property<string>("Active")
                         .HasMaxLength(500)
@@ -1531,7 +1531,7 @@ namespace SSP.Migrations
                     b.ToTable("AssetTaxPayerDetails_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.AssetType", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.AssetType", b =>
                 {
                     b.Property<int>("AssetId")
                         .ValueGeneratedOnAdd()
@@ -1569,7 +1569,7 @@ namespace SSP.Migrations
                     b.ToTable("Asset_Type", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Building", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Building", b =>
                 {
                     b.Property<long>("BuildingId")
                         .HasColumnType("bigint")
@@ -1704,7 +1704,7 @@ namespace SSP.Migrations
                     b.ToTable("Buildings");
                 });
 
-            modelBuilder.Entity("SSP.Payee.Business", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Business", b =>
                 {
                     b.Property<long>("BusinessId")
                         .HasColumnType("bigint")
@@ -1796,7 +1796,7 @@ namespace SSP.Migrations
                     b.ToTable("Businesses");
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessCategory", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessCategory", b =>
                 {
                     b.Property<int>("BsCtId")
                         .ValueGeneratedOnAdd()
@@ -1839,7 +1839,7 @@ namespace SSP.Migrations
                     b.ToTable("Business_Category", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessEmployee", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessEmployee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1913,7 +1913,7 @@ namespace SSP.Migrations
                     b.ToTable("BusinessEmployees");
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessOperation", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessOperation", b =>
                 {
                     b.Property<int>("BsOpId")
                         .ValueGeneratedOnAdd()
@@ -1956,7 +1956,7 @@ namespace SSP.Migrations
                     b.ToTable("Business_Operations", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessSector", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessSector", b =>
                 {
                     b.Property<int>("BsScId")
                         .HasColumnType("int")
@@ -2000,7 +2000,7 @@ namespace SSP.Migrations
                     b.ToTable("Business_Sectors", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessStructure", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessStructure", b =>
                 {
                     b.Property<int>("BsStId")
                         .HasColumnType("int")
@@ -2040,7 +2040,7 @@ namespace SSP.Migrations
                     b.ToTable("Business_Structure", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessSubSector", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessSubSector", b =>
                 {
                     b.Property<int>("BsSbId")
                         .HasColumnType("int")
@@ -2088,7 +2088,7 @@ namespace SSP.Migrations
                     b.ToTable("Business_Sub_Sectors", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessType", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessType", b =>
                 {
                     b.Property<int>("BusinessTypeId")
                         .ValueGeneratedOnAdd()
@@ -2127,7 +2127,7 @@ namespace SSP.Migrations
                     b.ToTable("Business_Type", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Business_Employee", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Business_Employee", b =>
                 {
                     b.Property<int>("EmployeeID")
                         .ValueGeneratedOnAdd()
@@ -2153,7 +2153,7 @@ namespace SSP.Migrations
                     b.ToTable("BusinessEmployee");
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessesApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessesApi", b =>
                 {
                     b.Property<long>("BusinessId")
                         .HasColumnType("bigint")
@@ -2285,7 +2285,7 @@ namespace SSP.Migrations
                     b.ToTable("Businesses_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessesApiMain", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessesApiMain", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -2430,7 +2430,7 @@ namespace SSP.Migrations
                     b.ToTable("Businesses_API_Main", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessesBkApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessesBkApi", b =>
                 {
                     b.Property<long>("BusinessId")
                         .HasColumnType("bigint")
@@ -2560,7 +2560,7 @@ namespace SSP.Migrations
                     b.ToTable("BusinessesBK_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.BusinessesFullApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.BusinessesFullApi", b =>
                 {
                     b.Property<int>("AssetTypeId")
                         .HasColumnType("int")
@@ -2713,7 +2713,7 @@ namespace SSP.Migrations
                     b.ToTable("Businesses_Full_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.ClearanceCertificate", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.ClearanceCertificate", b =>
                 {
                     b.Property<long>("CcId")
                         .ValueGeneratedOnAdd()
@@ -2814,7 +2814,7 @@ namespace SSP.Migrations
                     b.ToTable("Clearance_Certificates", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.CompaniesApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.CompaniesApi", b =>
                 {
                     b.Property<long>("CompanyId")
                         .HasColumnType("bigint")
@@ -2929,7 +2929,7 @@ namespace SSP.Migrations
                     b.ToTable("Companies_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Company", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Company", b =>
                 {
                     b.Property<long>("CompanyId")
                         .ValueGeneratedOnAdd()
@@ -3061,7 +3061,7 @@ namespace SSP.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("SSP.Payee.CompanyListApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.CompanyListApi", b =>
                 {
                     b.Property<int>("CompanyListId")
                         .ValueGeneratedOnAdd()
@@ -3139,7 +3139,7 @@ namespace SSP.Migrations
                     b.ToTable("CompanyList_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.CompanyListBkApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.CompanyListBkApi", b =>
                 {
                     b.Property<long>("TaxPayerId")
                         .HasColumnType("bigint")
@@ -3196,7 +3196,7 @@ namespace SSP.Migrations
                     b.ToTable("CompanyListBK_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Directorate", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Directorate", b =>
                 {
                     b.Property<int>("DirectoratesId")
                         .ValueGeneratedOnAdd()
@@ -3231,7 +3231,7 @@ namespace SSP.Migrations
                     b.ToTable("Directorates");
                 });
 
-            modelBuilder.Entity("SSP.Payee.EconomicActivity", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.EconomicActivity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -3271,7 +3271,7 @@ namespace SSP.Migrations
                     b.ToTable("Economic_Activities", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.EirsUser", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.EirsUser", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -3345,7 +3345,7 @@ namespace SSP.Migrations
                     b.ToTable("Eirs_User", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.EmployeeAnnualTax", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.EmployeeAnnualTax", b =>
                 {
                     b.Property<decimal?>("AnnualTax")
                         .HasColumnType("numeric(29, 2)");
@@ -3367,7 +3367,7 @@ namespace SSP.Migrations
                     b.ToView("EmployeeAnnualTax", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.EmployeeContributionOutputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.EmployeeContributionOutputFile", b =>
                 {
                     b.Property<int?>("ApiId")
                         .HasColumnType("int");
@@ -3423,7 +3423,7 @@ namespace SSP.Migrations
                     b.ToTable("EmployeeContributionOutputFile", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Employees_Monthly_Income", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Employees_Monthly_Income", b =>
                 {
                     b.Property<int>("EmployeeID")
                         .ValueGeneratedOnAdd()
@@ -3469,7 +3469,7 @@ namespace SSP.Migrations
                     b.ToTable("EmployeesMonthlyIncome");
                 });
 
-            modelBuilder.Entity("SSP.Payee.Employees_Monthly_Schedule", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Employees_Monthly_Schedule", b =>
                 {
                     b.Property<int>("EmployeeID")
                         .ValueGeneratedOnAdd()
@@ -3547,7 +3547,7 @@ namespace SSP.Migrations
                     b.ToTable("EmployeesMonthlySchedule");
                 });
 
-            modelBuilder.Entity("SSP.Payee.EmployerAssessmentOutputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.EmployerAssessmentOutputFile", b =>
                 {
                     b.Property<decimal?>("AprilCollections")
                         .HasColumnType("numeric(18, 2)");
@@ -3600,7 +3600,7 @@ namespace SSP.Migrations
                     b.ToTable("EmployerAssessmentOutputFile", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Exception", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Exception", b =>
                 {
                     b.Property<int>("ExceptionsId")
                         .ValueGeneratedOnAdd()
@@ -3665,7 +3665,7 @@ namespace SSP.Migrations
                     b.ToTable("Exceptions");
                 });
 
-            modelBuilder.Entity("SSP.Payee.ExceptionType", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.ExceptionType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -3695,7 +3695,7 @@ namespace SSP.Migrations
                     b.ToTable("Exception_Types", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.FileStatus", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.FileStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -3711,7 +3711,7 @@ namespace SSP.Migrations
                     b.ToTable("FileStatus", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.FormMaster", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.FormMaster", b =>
                 {
                     b.Property<int>("FormId")
                         .ValueGeneratedOnAdd()
@@ -3761,7 +3761,7 @@ namespace SSP.Migrations
                     b.ToTable("FormMaster", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.GroupFormRelation", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.GroupFormRelation", b =>
                 {
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int")
@@ -3789,7 +3789,7 @@ namespace SSP.Migrations
                     b.ToTable("GroupFormRelation", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.GroupMaster", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.GroupMaster", b =>
                 {
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -3834,7 +3834,7 @@ namespace SSP.Migrations
                     b.ToTable("GroupMaster", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Individual", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Individual", b =>
                 {
                     b.Property<long>("IndId")
                         .ValueGeneratedOnAdd()
@@ -3995,7 +3995,7 @@ namespace SSP.Migrations
                     b.ToTable("Individuals");
                 });
 
-            modelBuilder.Entity("SSP.Payee.IndividualsApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.IndividualsApi", b =>
                 {
                     b.Property<long>("TaxPayerId")
                         .HasColumnType("bigint")
@@ -4053,7 +4053,7 @@ namespace SSP.Migrations
                     b.ToTable("Individuals_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.IndividualsApiInput", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.IndividualsApiInput", b =>
                 {
                     b.Property<long>("TaxPayerId")
                         .HasColumnType("bigint")
@@ -4111,7 +4111,7 @@ namespace SSP.Migrations
                     b.ToTable("Individuals_API_Input", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.LegacySubmissionsPaye", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.LegacySubmissionsPaye", b =>
                 {
                     b.Property<double?>("AnnualMeal")
                         .HasColumnType("float");
@@ -4176,7 +4176,7 @@ namespace SSP.Migrations
                     b.ToTable("LegacySubmissionsPAYE", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.LocalGovernmentArea", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.LocalGovernmentArea", b =>
                 {
                     b.Property<int>("LgaId")
                         .ValueGeneratedOnAdd()
@@ -4221,7 +4221,7 @@ namespace SSP.Migrations
                     b.ToTable("Local_Government_Areas", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.MyView", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.MyView", b =>
                 {
                     b.Property<string>("AssessmentItemId")
                         .HasMaxLength(1)
@@ -4298,7 +4298,7 @@ namespace SSP.Migrations
                     b.ToView("MyView", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.MyView1", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.MyView1", b =>
                 {
                     b.Property<decimal?>("AprilContributions")
                         .HasColumnType("numeric(18, 2)");
@@ -4402,7 +4402,7 @@ namespace SSP.Migrations
                     b.ToView("MyView_1", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.Nationality", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Nationality", b =>
                 {
                     b.Property<string>("Adjective")
                         .HasMaxLength(50)
@@ -4432,7 +4432,7 @@ namespace SSP.Migrations
                     b.ToTable("Nationality", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Notification", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Notification", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -4491,7 +4491,7 @@ namespace SSP.Migrations
                     b.ToTable("Notifications");
                 });
 
-            modelBuilder.Entity("SSP.Payee.NotificationMethod", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.NotificationMethod", b =>
                 {
                     b.Property<int>("NotemId")
                         .ValueGeneratedOnAdd()
@@ -4522,7 +4522,7 @@ namespace SSP.Migrations
                     b.ToTable("Notification_Method", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.NotificationType", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.NotificationType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -4566,7 +4566,7 @@ namespace SSP.Migrations
                     b.ToTable("Notification_Types", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.PayeInputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PayeInputFile", b =>
                 {
                     b.Property<double?>("AnnualBasic")
                         .HasColumnType("float");
@@ -4695,7 +4695,7 @@ namespace SSP.Migrations
                     b.ToTable("PayeInputFile", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.PayeOuputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PayeOuputFile", b =>
                 {
                     b.Property<double?>("AnnualGross")
                         .HasColumnType("float");
@@ -4820,7 +4820,7 @@ namespace SSP.Migrations
                     b.ToTable("PayeOuputFile", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.PayesubmissionAbhayLive", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PayesubmissionAbhayLive", b =>
                 {
                     b.Property<string>("Address")
                         .HasMaxLength(255)
@@ -4848,7 +4848,7 @@ namespace SSP.Migrations
                     b.ToTable("PAYESUBMISSION_ABHAY_LIVE", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.PaymentFrequency", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PaymentFrequency", b =>
                 {
                     b.Property<int>("PayfId")
                         .ValueGeneratedOnAdd()
@@ -4886,7 +4886,7 @@ namespace SSP.Migrations
                     b.ToTable("Payment_Frequency", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.PaymentOption", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PaymentOption", b =>
                 {
                     b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
@@ -4924,7 +4924,7 @@ namespace SSP.Migrations
                     b.ToTable("Payment_Options", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.PreAsessmentTemp", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PreAsessmentTemp", b =>
                 {
                     b.Property<int?>("AssessmentItemId")
                         .HasColumnType("int")
@@ -5000,7 +5000,7 @@ namespace SSP.Migrations
                     b.ToTable("Pre_Asessment_Temp", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.PreAssessment", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PreAssessment", b =>
                 {
                     b.Property<long>("AssessId")
                         .ValueGeneratedOnAdd()
@@ -5117,7 +5117,7 @@ namespace SSP.Migrations
                     b.ToTable("Pre_Assessment", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.PreAssessment1", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PreAssessment1", b =>
                 {
                     b.Property<decimal?>("Amount")
                         .HasColumnType("numeric(18, 0)");
@@ -5142,7 +5142,7 @@ namespace SSP.Migrations
                     b.ToView("PreAssessment", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.PreAssessmentRdm", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.PreAssessmentRdm", b =>
                 {
                     b.Property<int?>("ApiId")
                         .HasColumnType("int");
@@ -5235,7 +5235,7 @@ namespace SSP.Migrations
                     b.ToTable("PreAssessmentRDM", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Profile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Profile", b =>
                 {
                     b.Property<long>("ProfileId")
                         .ValueGeneratedOnAdd()
@@ -5352,7 +5352,7 @@ namespace SSP.Migrations
                     b.ToTable("Profiles");
                 });
 
-            modelBuilder.Entity("SSP.Payee.ProfilesApi", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.ProfilesApi", b =>
                 {
                     b.Property<long>("ProfileId")
                         .HasColumnType("bigint")
@@ -5376,7 +5376,7 @@ namespace SSP.Migrations
                     b.ToTable("Profiles_API", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.RecordLink", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.RecordLink", b =>
                 {
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime");
@@ -5409,7 +5409,7 @@ namespace SSP.Migrations
                     b.ToTable("Record_Links", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.RevenueStream", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.RevenueStream", b =>
                 {
                     b.Property<int>("ReveId")
                         .ValueGeneratedOnAdd()
@@ -5442,7 +5442,7 @@ namespace SSP.Migrations
                     b.ToTable("Revenue_Stream", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.RevenueSubStream", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.RevenueSubStream", b =>
                 {
                     b.Property<int>("RevSsId")
                         .ValueGeneratedOnAdd()
@@ -5480,7 +5480,7 @@ namespace SSP.Migrations
                     b.ToTable("Revenue_Sub_Stream", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.RuleEngine", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.RuleEngine", b =>
                 {
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime");
@@ -5516,7 +5516,7 @@ namespace SSP.Migrations
                     b.ToTable("RuleEngine", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.SalaryBreakup", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.SalaryBreakup", b =>
                 {
                     b.Property<long>("SalId")
                         .ValueGeneratedOnAdd()
@@ -5628,7 +5628,7 @@ namespace SSP.Migrations
                     b.ToTable("Salary_Breakup", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.SalaryTypeMaster", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.SalaryTypeMaster", b =>
                 {
                     b.Property<string>("SalaryCode")
                         .HasMaxLength(10)
@@ -5642,7 +5642,7 @@ namespace SSP.Migrations
                     b.ToTable("SalaryTypeMaster", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.ScheduleComment", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.ScheduleComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -5673,7 +5673,7 @@ namespace SSP.Migrations
                     b.ToTable("ScheduleComment");
                 });
 
-            modelBuilder.Entity("SSP.Payee.ScheduleStatus", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.ScheduleStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -5699,7 +5699,7 @@ namespace SSP.Migrations
                     b.ToTable("ScheduleStatus");
                 });
 
-            modelBuilder.Entity("SSP.Payee.Settlement", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Settlement", b =>
                 {
                     b.Property<long>("SettleId")
                         .ValueGeneratedOnAdd()
@@ -5763,7 +5763,7 @@ namespace SSP.Migrations
                     b.ToTable("Settlements");
                 });
 
-            modelBuilder.Entity("SSP.Payee.SettlementMethod", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.SettlementMethod", b =>
                 {
                     b.Property<int>("SettId")
                         .ValueGeneratedOnAdd()
@@ -5793,7 +5793,7 @@ namespace SSP.Migrations
                     b.ToTable("Settlement_Method", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.SettlementStatus", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.SettlementStatus", b =>
                 {
                     b.Property<int>("SettStId")
                         .HasColumnType("int")
@@ -5828,7 +5828,7 @@ namespace SSP.Migrations
                     b.ToTable("Settlement_Status", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.StateMaster", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.StateMaster", b =>
                 {
                     b.Property<int?>("CreatedBy")
                         .HasColumnType("int")
@@ -5865,7 +5865,7 @@ namespace SSP.Migrations
                     b.ToTable("StateMaster", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Submission", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Submission", b =>
                 {
                     b.Property<string>("AssessmentItems")
                         .HasMaxLength(150)
@@ -5910,7 +5910,7 @@ namespace SSP.Migrations
                     b.ToTable("Submissions");
                 });
 
-            modelBuilder.Entity("SSP.Payee.SubmissionsBkpaa", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.SubmissionsBkpaa", b =>
                 {
                     b.Property<string>("AssessmentItems")
                         .HasMaxLength(150)
@@ -5955,7 +5955,7 @@ namespace SSP.Migrations
                     b.ToTable("SubmissionsBKPAA", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.SubmissionsDefault", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.SubmissionsDefault", b =>
                 {
                     b.Property<string>("AssessmentItems")
                         .HasMaxLength(150)
@@ -6000,7 +6000,7 @@ namespace SSP.Migrations
                     b.ToTable("Submissions_default", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.TablesApiUpdated", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.TablesApiUpdated", b =>
                 {
                     b.Property<int?>("Frequency")
                         .HasColumnType("int");
@@ -6020,7 +6020,7 @@ namespace SSP.Migrations
                     b.ToTable("tables_API_Updated", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.TaxNewYear", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.TaxNewYear", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -6036,7 +6036,7 @@ namespace SSP.Migrations
                     b.ToTable("TaxNewYears");
                 });
 
-            modelBuilder.Entity("SSP.Payee.TaxOffice", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.TaxOffice", b =>
                 {
                     b.Property<int>("ToId")
                         .ValueGeneratedOnAdd()
@@ -6075,7 +6075,7 @@ namespace SSP.Migrations
                     b.ToTable("Tax_Offices", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.TaxPayerRole", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.TaxPayerRole", b =>
                 {
                     b.Property<long>("TptId")
                         .ValueGeneratedOnAdd()
@@ -6121,7 +6121,7 @@ namespace SSP.Migrations
                     b.ToTable("Tax_Payer_Roles", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.TaxPayerType", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.TaxPayerType", b =>
                 {
                     b.Property<int>("TptypeId")
                         .ValueGeneratedOnAdd()
@@ -6159,7 +6159,7 @@ namespace SSP.Migrations
                     b.ToTable("Tax_Payer_Types", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.Title", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Title", b =>
                 {
                     b.Property<int>("TitleId")
                         .ValueGeneratedOnAdd()
@@ -6204,7 +6204,7 @@ namespace SSP.Migrations
                     b.ToTable("Titles");
                 });
 
-            modelBuilder.Entity("SSP.Payee.TokenManagement", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.TokenManagement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -6241,7 +6241,7 @@ namespace SSP.Migrations
                     b.ToTable("TokenManagement", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.Town", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Town", b =>
                 {
                     b.Property<int>("TownId")
                         .ValueGeneratedOnAdd()
@@ -6283,7 +6283,7 @@ namespace SSP.Migrations
                     b.ToTable("Towns");
                 });
 
-            modelBuilder.Entity("SSP.Payee.UserManagement", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.UserManagement", b =>
                 {
                     b.Property<int>("CompanyID")
                         .ValueGeneratedOnAdd()
@@ -6314,7 +6314,7 @@ namespace SSP.Migrations
                     b.ToTable("UserManagement");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwAssessIndSal", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwAssessIndSal", b =>
                 {
                     b.Property<DateTime>("AssessmentDate")
                         .HasColumnType("datetime")
@@ -6378,7 +6378,7 @@ namespace SSP.Migrations
                     b.ToView("vw_assess_ind_sal", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwAssessIndSalRefund", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwAssessIndSalRefund", b =>
                 {
                     b.Property<DateTime>("AssessmentDate")
                         .HasColumnType("datetime")
@@ -6438,7 +6438,7 @@ namespace SSP.Migrations
                     b.ToView("vw_assess_ind_sal_refund", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwAssessmentRule", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwAssessmentRule", b =>
                 {
                     b.Property<double?>("AssessmentAmount")
                         .HasColumnType("float");
@@ -6557,7 +6557,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Assessment_Rules", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwAssessmentSearch", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwAssessmentSearch", b =>
                 {
                     b.Property<double>("AssessmentAmount")
                         .HasColumnType("float")
@@ -6652,7 +6652,7 @@ namespace SSP.Migrations
                     b.ToView("vw_assessment_search", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwBusinessCompRelation", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwBusinessCompRelation", b =>
                 {
                     b.Property<string>("CompanyName")
                         .IsRequired()
@@ -6692,7 +6692,7 @@ namespace SSP.Migrations
                     b.ToView("vw_business_comp_relation", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwBusinessDetail", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwBusinessDetail", b =>
                 {
                     b.Property<string>("AssetRin")
                         .HasMaxLength(50)
@@ -6727,7 +6727,7 @@ namespace SSP.Migrations
                     b.ToView("vw_BusinessDetails", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwClearanceCertReq", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwClearanceCertReq", b =>
                 {
                     b.Property<decimal?>("Amount")
                         .HasColumnType("numeric(18, 0)");
@@ -6775,7 +6775,7 @@ namespace SSP.Migrations
                     b.ToView("vw_clearanceCertReq", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwCompIndSal", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwCompIndSal", b =>
                 {
                     b.Property<string>("Address")
                         .HasMaxLength(302)
@@ -6955,7 +6955,7 @@ namespace SSP.Migrations
                     b.ToView("vw_comp_ind_sal", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwCompany", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwCompany", b =>
                 {
                     b.Property<double?>("AccountBalance")
                         .HasColumnType("float")
@@ -7154,7 +7154,7 @@ namespace SSP.Migrations
                     b.ToView("vw_companies", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwCorporatesAsset", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwCorporatesAsset", b =>
                 {
                     b.Property<string>("AssetRin")
                         .HasMaxLength(50)
@@ -7207,7 +7207,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Corporates_Assets", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwDistinctIndividual", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwDistinctIndividual", b =>
                 {
                     b.Property<string>("ContactAddress")
                         .HasMaxLength(500)
@@ -7265,7 +7265,7 @@ namespace SSP.Migrations
                     b.ToView("vw_distinct_Individuals", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwEmployeeContributionOutputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwEmployeeContributionOutputFile", b =>
                 {
                     b.Property<decimal?>("AprilContributions")
                         .HasColumnType("numeric(18, 2)");
@@ -7369,7 +7369,7 @@ namespace SSP.Migrations
                     b.ToView("vw_EmployeeContributionOutputFile", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwEmployerContribution", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwEmployerContribution", b =>
                 {
                     b.Property<decimal?>("Apr")
                         .HasColumnType("numeric(38, 2)");
@@ -7445,7 +7445,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Employer_Contribution", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwEmployerContributionOld", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwEmployerContributionOld", b =>
                 {
                     b.Property<decimal?>("Apr")
                         .HasColumnType("numeric(38, 2)");
@@ -7506,7 +7506,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Employer_Contribution_old", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwGetCollectorOutputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwGetCollectorOutputFile", b =>
                 {
                     b.Property<decimal?>("AprilContributions")
                         .HasColumnType("numeric(18, 2)");
@@ -7615,7 +7615,7 @@ namespace SSP.Migrations
                     b.ToView("vw_getCollectorOutputFIle", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwGetDistinctInputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwGetDistinctInputFile", b =>
                 {
                     b.Property<string>("BusinessName")
                         .HasMaxLength(200)
@@ -7658,7 +7658,7 @@ namespace SSP.Migrations
                     b.ToView("vw_getDistinct_input_file", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwGetPreAssessment", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwGetPreAssessment", b =>
                 {
                     b.Property<int?>("AssessmentItemId")
                         .HasColumnType("int")
@@ -7733,7 +7733,7 @@ namespace SSP.Migrations
                     b.ToView("vw_GetPreAssessment", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwGetPreAssessment31Jan2020", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwGetPreAssessment31Jan2020", b =>
                 {
                     b.Property<int?>("AssessmentItemId")
                         .HasColumnType("int")
@@ -7808,7 +7808,7 @@ namespace SSP.Migrations
                     b.ToView("vw_GetPreAssessment_31_JAN_2020", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwIndDetail", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwIndDetail", b =>
                 {
                     b.Property<string>("CompanyRin")
                         .IsUnicode(false)
@@ -7907,7 +7907,7 @@ namespace SSP.Migrations
                     b.ToView("vw_ind_details", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwInputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwInputFile", b =>
                 {
                     b.Property<double>("AnnualMeal")
                         .HasColumnType("float");
@@ -8055,7 +8055,7 @@ namespace SSP.Migrations
                     b.ToView("vw_InputFile", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwInputFileMain", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwInputFileMain", b =>
                 {
                     b.Property<double?>("AnnualGross")
                         .HasColumnType("float");
@@ -8232,7 +8232,7 @@ namespace SSP.Migrations
                     b.ToView("vw_InputFileMain", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwInputFileMainView", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwInputFileMainView", b =>
                 {
                     b.Property<double?>("AnnualGross")
                         .HasColumnType("float");
@@ -8403,7 +8403,7 @@ namespace SSP.Migrations
                     b.ToView("vw_InputFile_MainView", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwInt", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwInt", b =>
                 {
                     b.Property<double?>("AnnualBasic")
                         .HasColumnType("float");
@@ -8516,7 +8516,7 @@ namespace SSP.Migrations
                     b.ToView("vw_int", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwLegacySubmission", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwLegacySubmission", b =>
                 {
                     b.Property<double>("AnnualMeal")
                         .HasColumnType("float");
@@ -8597,7 +8597,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Legacy_Submissions", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwMonthlyTaxCompanyWise", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwMonthlyTaxCompanyWise", b =>
                 {
                     b.Property<double?>("Apr")
                         .HasColumnType("float");
@@ -8645,7 +8645,7 @@ namespace SSP.Migrations
                     b.ToView("vw_monthly_tax_company_wise", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwMonthlyTaxEmpWise", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwMonthlyTaxEmpWise", b =>
                 {
                     b.Property<double?>("Apr")
                         .HasColumnType("float");
@@ -8692,7 +8692,7 @@ namespace SSP.Migrations
                     b.ToView("vw_monthly_tax_emp_wise", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwPateInputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwPateInputFile", b =>
                 {
                     b.Property<string>("AssessmentYear")
                         .HasMaxLength(10)
@@ -8768,7 +8768,7 @@ namespace SSP.Migrations
                     b.ToView("vw_PateInputFile", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwPayeInputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwPayeInputFile", b =>
                 {
                     b.Property<string>("BsnRin")
                         .HasMaxLength(10)
@@ -8822,7 +8822,7 @@ namespace SSP.Migrations
                     b.ToView("vw_PayeInputFile", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwPayeInputFileN", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwPayeInputFileN", b =>
                 {
                     b.Property<string>("AssessmentYear")
                         .HasMaxLength(10)
@@ -8879,7 +8879,7 @@ namespace SSP.Migrations
                     b.ToView("vw_PayeInputFile_N", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwPayment", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwPayment", b =>
                 {
                     b.Property<decimal?>("Amount")
                         .HasColumnType("numeric(18, 0)");
@@ -8946,7 +8946,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Payment", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwPaymentDetail", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwPaymentDetail", b =>
                 {
                     b.Property<double>("AssessmentAmount")
                         .HasColumnType("float")
@@ -9007,7 +9007,7 @@ namespace SSP.Migrations
                     b.ToView("vw_payment_details", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwPerformanceReport", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwPerformanceReport", b =>
                 {
                     b.Property<double>("ActualAssessmentAmt")
                         .HasColumnType("float");
@@ -9043,7 +9043,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Performance_Report", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwPreAssessmentRdm", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwPreAssessmentRdm", b =>
                 {
                     b.Property<string>("AssessmentRefNo")
                         .HasMaxLength(50)
@@ -9091,7 +9091,7 @@ namespace SSP.Migrations
                     b.ToView("vw_PreAssessmentRDM", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwRefundCase1", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwRefundCase1", b =>
                 {
                     b.Property<double>("AfterJoin")
                         .HasColumnType("float");
@@ -9108,7 +9108,7 @@ namespace SSP.Migrations
                     b.ToView("Vw_RefundCase1", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwRulesCheck", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwRulesCheck", b =>
                 {
                     b.Property<double>("AssessmentAmount")
                         .HasColumnType("float");
@@ -9187,7 +9187,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Rules_Check", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwRulesCheck1", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwRulesCheck1", b =>
                 {
                     b.Property<double>("AssessmentAmount")
                         .HasColumnType("float");
@@ -9266,7 +9266,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Rules_Check_1", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwRulesCheck11", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwRulesCheck11", b =>
                 {
                     b.Property<double>("AssessmentAmount")
                         .HasColumnType("float");
@@ -9345,7 +9345,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Rules_Check1", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwRulesCheckOld", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwRulesCheckOld", b =>
                 {
                     b.Property<double>("AssessmentAmount")
                         .HasColumnType("float");
@@ -9409,7 +9409,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Rules_Check_old", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSalBkupAfterJoinCase", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSalBkupAfterJoinCase", b =>
                 {
                     b.Property<double?>("Apr")
                         .HasColumnType("float");
@@ -9465,7 +9465,7 @@ namespace SSP.Migrations
                     b.ToView("vw_sal_bkup_after_join_case", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSalBkupIncrementCase", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSalBkupIncrementCase", b =>
                 {
                     b.Property<double?>("Apr")
                         .HasColumnType("float");
@@ -9534,7 +9534,7 @@ namespace SSP.Migrations
                     b.ToView("vw_sal_bkup_increment_case", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSettlement", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSettlement", b =>
                 {
                     b.Property<string>("AssessmentRef")
                         .IsUnicode(false)
@@ -9568,7 +9568,7 @@ namespace SSP.Migrations
                     b.ToView("vw_settlements", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSettlementReport", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSettlementReport", b =>
                 {
                     b.Property<double>("AssessmentAmount")
                         .HasColumnType("float")
@@ -9611,7 +9611,7 @@ namespace SSP.Migrations
                     b.ToView("vw_settlement_report", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSettlementReport2", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSettlementReport2", b =>
                 {
                     b.Property<string>("AssessmentRef")
                         .IsUnicode(false)
@@ -9627,7 +9627,7 @@ namespace SSP.Migrations
                     b.ToView("vw_settlement_report_2", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwShowBusiness", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwShowBusiness", b =>
                 {
                     b.Property<string>("BusinessName")
                         .HasMaxLength(200)
@@ -9671,7 +9671,7 @@ namespace SSP.Migrations
                     b.ToView("vw_ShowBusiness", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwShowBusinessPayeInputFile", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwShowBusinessPayeInputFile", b =>
                 {
                     b.Property<string>("BusinessName")
                         .HasMaxLength(200)
@@ -9744,7 +9744,7 @@ namespace SSP.Migrations
                     b.ToView("vw_ShowBusiness_PayeInputFile", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwShowBusinessPayeInputFileAll", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwShowBusinessPayeInputFileAll", b =>
                 {
                     b.Property<string>("BusinessName")
                         .HasMaxLength(200)
@@ -9817,7 +9817,7 @@ namespace SSP.Migrations
                     b.ToView("vw_ShowBusiness_PayeInputFile_All", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwShowBusinessPayeInputFileAll1", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwShowBusinessPayeInputFileAll1", b =>
                 {
                     b.Property<string>("BusinessName")
                         .HasMaxLength(200)
@@ -9890,7 +9890,7 @@ namespace SSP.Migrations
                     b.ToView("vw_ShowBusiness_PayeInputFile_All_1", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwShowBusinessPayeInputFileAll2", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwShowBusinessPayeInputFileAll2", b =>
                 {
                     b.Property<string>("BusinessName")
                         .IsRequired()
@@ -9969,7 +9969,7 @@ namespace SSP.Migrations
                     b.ToView("vw_ShowBusiness_PayeInputFile_All_2", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwShowBusinessPayeInputFileAllA", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwShowBusinessPayeInputFileAllA", b =>
                 {
                     b.Property<string>("BusinessName")
                         .HasMaxLength(200)
@@ -10039,7 +10039,7 @@ namespace SSP.Migrations
                     b.ToView("vw_ShowBusiness_PayeInputFile_All_A", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwShowBusinessPayeInputFileAllSelected", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwShowBusinessPayeInputFileAllSelected", b =>
                 {
                     b.Property<string>("AssessmentYear")
                         .HasMaxLength(50)
@@ -10118,7 +10118,7 @@ namespace SSP.Migrations
                     b.ToView("vw_ShowBusiness_PayeInputFile_All_Selected", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSubmission", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSubmission", b =>
                 {
                     b.Property<string>("AssessmentItemName")
                         .HasMaxLength(200)
@@ -10156,7 +10156,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Submissions", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSubmissionView", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSubmissionView", b =>
                 {
                     b.Property<int?>("AssessmentItemId")
                         .HasColumnType("int")
@@ -10243,7 +10243,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Submission_View", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSubmissionViewOtherMonth", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSubmissionViewOtherMonth", b =>
                 {
                     b.Property<string>("AssessmentItemName")
                         .HasMaxLength(200)
@@ -10295,7 +10295,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Submission_View_otherMonths", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwSubmissions1", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwSubmissions1", b =>
                 {
                     b.Property<string>("AssessmentItemName")
                         .HasMaxLength(200)
@@ -10336,7 +10336,7 @@ namespace SSP.Migrations
                     b.ToView("vw_submissions_1", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwTaxAnalysis", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwTaxAnalysis", b =>
                 {
                     b.Property<string>("AnnualGross")
                         .HasMaxLength(4000)
@@ -10483,7 +10483,7 @@ namespace SSP.Migrations
                     b.ToView("vw_taxAnalysis", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwTaxAnalysis24Oct2019", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwTaxAnalysis24Oct2019", b =>
                 {
                     b.Property<string>("AnnualGross")
                         .HasMaxLength(4000)
@@ -10624,7 +10624,7 @@ namespace SSP.Migrations
                     b.ToView("vw_taxAnalysis_24_OCT_2019", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwTaxComputation", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwTaxComputation", b =>
                 {
                     b.Property<decimal?>("AprilContributions")
                         .HasColumnType("numeric(18, 2)");
@@ -10697,7 +10697,7 @@ namespace SSP.Migrations
                     b.ToView("vw_tax_computation", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwTaxComputationEmployerCollection", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwTaxComputationEmployerCollection", b =>
                 {
                     b.Property<string>("AssessmentItemName")
                         .HasMaxLength(200)
@@ -10741,7 +10741,7 @@ namespace SSP.Migrations
                     b.ToView("vw_Tax_Computation_EmployerCollection", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwTaxComputationFinal", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwTaxComputationFinal", b =>
                 {
                     b.Property<int?>("AssessmentItemId")
                         .HasColumnType("int")
@@ -10815,7 +10815,7 @@ namespace SSP.Migrations
                     b.ToView("vw_tax_computation_finals", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwTaxbaseComputationFinal", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwTaxbaseComputationFinal", b =>
                 {
                     b.Property<int?>("AssessmentYear")
                         .HasColumnType("int");
@@ -10849,7 +10849,7 @@ namespace SSP.Migrations
                     b.ToView("vw_taxbase_Computation_Final", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.VwTestKaushikView", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.VwTestKaushikView", b =>
                 {
                     b.Property<int?>("AssessmentItemId")
                         .HasColumnType("int")
@@ -10936,7 +10936,7 @@ namespace SSP.Migrations
                     b.ToView("vw_test_kaushik_view", "spike");
                 });
 
-            modelBuilder.Entity("SSP.Payee.Ward", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.Ward", b =>
                 {
                     b.Property<int>("Lga")
                         .HasColumnType("int")
@@ -10976,7 +10976,7 @@ namespace SSP.Migrations
                     b.ToTable("Wards");
                 });
 
-            modelBuilder.Entity("SSP.Payee.WinastAutoEmailDetail", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.WinastAutoEmailDetail", b =>
                 {
                     b.Property<int>("AutoId")
                         .ValueGeneratedOnAdd()
@@ -11083,7 +11083,7 @@ namespace SSP.Migrations
                     b.ToTable("winast_auto_email_detail", (string)null);
                 });
 
-            modelBuilder.Entity("SSP.Payee.WinastAutoSmsDetail", b =>
+            modelBuilder.Entity("SSP.Repository.Payee.WinastAutoSmsDetail", b =>
                 {
                     b.Property<int>("AutoId")
                         .ValueGeneratedOnAdd()

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SSP.Controllers;
-using SSP.EIRSModel;
-using SSP.Infrastructure;
+using SSP.Repository.EIRSModel;
+using SSP.Repository.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

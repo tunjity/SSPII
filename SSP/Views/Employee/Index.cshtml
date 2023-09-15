@@ -1,5 +1,5 @@
-﻿@using SSP.Payee;
-@model List<SSP.Payee.PayeInputFile>
+﻿@using SSP.Repository.Payee;
+@model List<SSP.Repository.Payee.PayeInputFile>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AppLayout.cshtml";
@@ -49,13 +49,17 @@
                         <tr>
                             <td>@item.EmployeeId</td>
                             <td>@item.Employee.Fullname</td>
-                            <td>@item.AssetTypeName</td>
+                            <td>@item.EmployeeId</td>
+                            <td>@item.Employee.Fullname</td> 
+                            <td>@item.EmployeeId</td>
+                            <td>@item.Employee.Fullname</td>
+                            @*<td>@item.AssetTypeName</td>
                             <td>@item.AssetTypeName</td>
                             <td>@item.TaxPayerEmailAddress</td>
-                            <td>@item.AssetLga</td>
+                            <td>@item.AssetLga</td>*@
                             <td>
                                 <button class="sidebar-dark-success">
-                                    <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.AssetRin})" class="link-success" style="text-decoration: none; color:#fff">View</a>
+                                <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.EmployeeId})" class="link-success" style="text-decoration: none; color:#fff">View</a>
                                 </button>
                             </td>
                         </tr>

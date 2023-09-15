@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SSP.Infrastructure.RawSql;
-using SSP.Infrastructure;
+using SSP.Repository.Infrastructure.RawSql;
+using SSP.Repository.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SSP.Controllers.MonthlyRemitance
