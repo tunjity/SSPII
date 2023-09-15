@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Upload";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+    string kkk = ViewBag.tempMsg;
+}
+
+<div class="card-body">
+    <div>
+        <p>@kkk</p>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        @using (Html.BeginForm("Upload", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div>
+                @Html.TextBox("file", "", new {  type= "file"}) <br />
+                <p>
+                    To Download The Template     <a href="@Url.Action("DownloadFile", "Employee")" class="link-success" style="text-decoration: none; color:red">Click Here</a>
+                </p>
+                @*<input type="submit" value="Upload" />*@
+                <button class="btn text-white" type="submit" style="padding-left: 2.5rem; padding-right: 2.5rem; border-radius: 30px; background-color: #4CAF50 !important;">Upload</button>
+
+                @ViewBag.Message
+            </div>
+        }
+    </div>
+</div>

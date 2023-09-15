@@ -1,6 +1,5 @@
-﻿@model SSP.Models.CreationModel.SignIn
+﻿@model SSP.EIRSModel.Company
 
-<!-- Navbar -->
 @if (TempData["AlertMessage"] != null)
 {
     if (TempData["AlertMessage"].ToString().Contains("Error"))
@@ -16,6 +15,7 @@
         </div>
     }
 }
+
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4CAF50;">
     <!-- Container wrapper -->
     <div class="container">
@@ -23,7 +23,7 @@
         <a class="navbar-brand" href="#">
             <img src="/images/logo1.png" alt="Logo" class="img-fluid my-0 mx-0" loading="lazy" style="max-width: 280px; max-height: 45px; margin-top: -1px;">
         </a>
-       
+
 
         <!-- Toggle button -->
         <button class="navbar-toggler"
@@ -40,7 +40,6 @@
         <div class="collapse navbar-collapse" id="navbarButtonsExample">
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                
             </ul>
             <!-- Left links -->
 
@@ -92,58 +91,31 @@
             <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 <div class="mx-auto text-center my-2">
                     <img src="assets/images/user.png" alt="" srcset="" width="75">
-                    <p>Please login to access your portal</p>
                 </div>
-                @using (Html.BeginForm("SignIn", "Login", FormMethod.Post))
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.CompanyName)</dt>
+                    <dd>@Html.DisplayFor(model => model.CompanyName)</dd>
+                    <dt>@Html.DisplayNameFor(model => model.MobileNumber1)</dt>
+                    <dd>@Html.DisplayFor(model => model.MobileNumber1)</dd>
+                    <dt>@Html.DisplayNameFor(model => model.CompanyRin)</dt>
+                    <dd>@Html.DisplayFor(model => model.CompanyRin)</dd>
+                    <dt>@Html.DisplayNameFor(model => model.ContactAddress)</dt>
+                    <dd>@Html.DisplayFor(model => model.ContactAddress)</dd>
+                </dl>
+                @using (Html.BeginForm("ValidateOTPAccount", "Login", FormMethod.Get))
                 {
                     <form>
-                        <!-- Select input -->
-                    @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
-
-                        <div class="form-group">
-                            @*   @Html.LabelFor(model => model.UserType, htmlAttributes: new { @class = "control-label required-star" })*@
-                            <strong> Select UserType :</strong><br />
-                            @Html.DropDownListFor(model => model.UserType,ViewBag.TaxPayerTypeList as SelectList,  "Select Tax Payer Type",  new { @class = "form-control bs-select", @tabindex = "1", @data_live_search = "true", @id = "cboFromTaxPayerType" })
-                            @Html.ValidationMessageFor(model => model.UserType, "", htmlAttributes: new { @class = "help-block" })
-                        </div>
-                        <div class="form-group">
-                            <strong> Enter PhoneNumber or RIN :</strong><br />
-                            @Html.TextBoxFor(Model => Model.PhoneNumber_RIN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter PhoneNumber or RIN" })
-                            @Html.ValidationMessageFor(Model => Model.PhoneNumber_RIN, "", new { @class = "help-block" })
-                        </div>
-                        <div class="form-group">
-
-                            <strong> Enter Password :</strong><br />
-                            @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control", @autocomplete = "off", @tabindex = "2", @placeholder = "Enter Password", @type = "password" })
-                            @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "help-block" })
-                        </div>
-                  
-
-                        <div class="d-flex justify-content-between align-items-center">
-                            <!-- Checkbox -->
-                            <div class="form-check mb-0">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                                <label class="form-check-label" for="form2Example3">
-                                    Remember me
-                                </label>
-                            </div>
-                            <a href="@Url.Action("ForgetPassword", "Login")" class="" style="color:#00834E; text-decoration: none;">Forgot password?</a>
-                        </div>
-
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button class="btn text-white" type="submit" style="padding-left: 2.5rem; padding-right: 2.5rem; border-radius: 30px; background-color: #4CAF50 !important;">Login</button>
+                                <button class="btn text-white" type="submit" style="padding-left: 2.5rem; padding-right: 2.5rem; border-radius: 30px; background-color: #4CAF50 !important;">Validate OTP</button>
                             </div>
-                            <p class="small fw-bold mt-2 pt-1 mb-0 text-center">
-                                Don't have an account? <a href="@Url.Action("CreateAccountStepOne", "Login")" class="link-success" style="text-decoration: none;">Create Account</a>
-                            </p>
-                        </div>
 
+                        </div>
 
                     </form>
                 }
             </div>
+
         </div>
     </div>
 </section>
