@@ -1,192 +1,125 @@
-﻿@using SSP.Payee;
-@model List<SSP.Payee.PayeInputFile>
+﻿@model BusinessEmployeeCreateAndGetViewModel
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 
-    IList<EmployeesMonthlyIncome> employeesMonthlyIncomes = (IList<EmployeesMonthlyIncome>)ViewBag.EmployeesMonthlyIncome;
-}
-
-<div class="card">
-    <div class="card-header">
-        <h5 class="card-title mb-0">List of Employees for CBS</h5>
-        <div class="float-right">
-            <button type="button" class="btn btn-primary mr-2"><i class="fa fa-plus"></i> Bulk Upload</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</button>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="form-row mb-3">
-            <div class="col-md-6">
-                <label for="search-input">Business Name/ID</label>
-                <div class="input-group">
-                    @Html.DropDownList("cboTaxPayerRoleID", (SelectList)ViewBag.TaxBusiness, "Select Business", htmlAttributes: new { @tabindex = "4", @class = "form-control bs-select", @id = "txtsearch" })
-
-  
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" id="search-btn" type="button"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-            </div>
-        </div>
-            <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                    <th>Taxpayer ID</th>
-                        <th>Business Name</th>
-                        <th>Industry Sector</th>
-                        <th>Industry Sub-Sector</th>
-                        <th>Address</th>
-                        <th>LGA</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach (var item in employeesMonthlyIncomes)
-                    {
-                        <tr>
-                            <td>@item.EmployeeId</td>
-                            <td>@item.Employee.Fullname</td>
-                            <td>@item.AssetTypeName</td>
-                            <td>@item.AssetTypeName</td>
-                            <td>@item.TaxPayerEmailAddress</td>
-                            <td>@item.AssetLga</td>
-                            <td>
-                                <button class="sidebar-dark-success">
-                                    <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.AssetRin})" class="link-success" style="text-decoration: none; color:#fff">View</a>
-                                </button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                    <th>Taxpayer ID</th>
-                        <th>Business Name</th>
-                        <th>Industry Sector</th>
-                        <th>Industry Sub-Sector</th>
-                        <th>Address</th>
-                        <th>LGA</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
-            </table>
-    </div>
-    <div class="card-footer">
-        <button type="button" class="btn btn-primary float-right">Forward Schedule</button>
-    </div>
-</div>
-
-
-    <script src="/NewTemplate/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="/NewTemplate/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="/NewTemplate/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/NewTemplate/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/NewTemplate/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/NewTemplate/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="/NewTemplate/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="/NewTemplate/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="/NewTemplate/plugins/jszip/jszip.min.js"></script>
-    <script src="/NewTemplate/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="/NewTemplate/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="/NewTemplate/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="/NewTemplate/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="/NewTemplate/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="/NewTemplate/dist/js/adminlte.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#search-btn").click(function () {
-            var searchTerm = $("#txtsearch").val();
-            alert(searchTerm);
-            $.ajax({
-                type: "GET",
-                url: "/Indexe",
-                data: {
-                    searchData: searchTerm
-                },
-                success: function (response) {
-                    console.log("ok");
-                    // handle the response data
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("error");
-                    // handle the error
-                }
-            });
-        });
-    });
-</script>
-@*@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AppLayout.cshtml";
+    string dec = ViewBag.Upshow;
 }
 
 <div class="card">
     <div class="card-header">
         <h5 class="card-title mb-0">List of Employees</h5>
+
         <div class="float-right">
-            <button type="button" class="btn btn-primary mr-2"><i class="fa fa-plus"></i> Bulk Upload</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</button>
+            <button type="button" class="btn btn-primary mr-2">
+                <i class="fa fa-plus">
+                    <a href="@Url.Action("Upload", "Employee")" class="link-success" style="text-decoration: none; color:#fff">Bulk Upload</a>
+                </i> 
+            </button>
+            <button type="button" class="btn btn-primary">
+                <i class="fa fa-plus">
+                    <a href="@Url.Action("Add", "Employee")" class="link-success" style="text-decoration: none; color:#fff">Add Employee</a>
+                </i> 
+            </button>
         </div>
     </div>
+
     <div class="card-body">
+        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            @using (Html.BeginForm("Index", "Employee", FormMethod.Post))
+            {
+                <form>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="col-md-12">
+                        @*   @Html.LabelFor(model => model.UserType, htmlAttributes: new { @class = "control-label required-star" })*@
+                        <strong> Select Year :</strong><br />
+                        @Html.DropDownListFor(model => model.employeeBusinessFilter.Year,ViewBag.Year as SelectList,  "Select Year",  new { @class = "form-control bs-select", @tabindex = "1", @data_live_search = "true", @id = "cboFromTaxPayerType" })
+                        @Html.ValidationMessageFor(model => model.employeeBusinessFilter.Year, "", htmlAttributes: new { @class = "help-block" })
 
-        <table id="example1" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Tax Payer Id</th>
-                    <th>Full Name</th>
-                    <th>Total Income</th>
-                    <th>Total Reliefs</th>
-                    <th>Edit</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Count > 0)
-                {
-                    @foreach (var item in Model)
+                        <strong>Business ID : </strong> <br />
+                        @Html.DropDownListFor(model => model.employeeBusinessFilter.CompRin,ViewBag.CompRin as SelectList,  "Select Business Name",  new { @class = "form-control bs-select", @tabindex = "1", @data_live_search = "true", @id = "cboFromCompRin" })
+                        @Html.ValidationMessageFor(model => model.employeeBusinessFilter.CompRin, "", htmlAttributes: new { @class = "help-block" })
+
+                    </div>
+                    <div class="form-group">
+                        <strong>Business ID : </strong> <br />
+                        @Html.DropDownListFor(model => model.employeeBusinessFilter.CompRin,ViewBag.CompRin as SelectList,  "Select Business Name",  new { @class = "form-control bs-select", @tabindex = "1", @data_live_search = "true", @id = "cboFromCompRin" })
+                        @Html.ValidationMessageFor(model => model.employeeBusinessFilter.CompRin, "", htmlAttributes: new { @class = "help-block" })
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button class="btn text-white" type="submit" style="padding-left: 2.5rem; padding-right: 2.5rem; border-radius: 30px; background-color: #4CAF50 !important;">Confirm</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            }
+        </div>
+        @if (dec != "0")
+        {
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Tax Payer Id</th>
+                        <th>Full Name</th>
+                        <th>Total Income</th>
+                        <th>Total Reliefs</th>
+                        <th>Edit</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
                     {
-                        <tr>
-                            <td>@item.EmployeeRin</td>
-                            <td>@item.FullName</td>
-                            <td>@item.TotalIncome</td>
-                            <td>@item.TotalRelief</td>
-                            <td>
-                                <button class="btn btn-primary mr-2">
-                                    <i class="fa fa-pencil"></i>
-                                    <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.EmployeeRin})" class="link-success" style="text-decoration: none; color:#fff">Edit</a>
-                                </button>
-                            </td>
-                            <td>
-                                <button class="sidebar-dark-success">
-                                    <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.EmployeeRin})" class="link-success" style="text-decoration: none; color:#fff">Active/InActive</a>
-                                </button>
-                            </td>
-                        </tr>
-                    }
+                        @foreach (var item in Model.empList)
+                        {
+                            <tr>
+                                <td>@item.Employee.EmployeeId</td>
+                                <td>@item.Employee.FullName</td>
+                                <td>@item.TotalIncome</td>
+                                <td>@item.TotalRelief</td>
+                                <td>
+                                    <button class="btn btn-primary mr-2">
+                                        <i class="fa fa-pencil"></i>
+                                        <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.EmployeeId})" class="link-success" style="text-decoration: none; color:#fff">Edit</a>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="sidebar-dark-success">
+                                        <a href="@Url.Action("GetByRIN", "BusinessEmployee",new {rin = item.EmployeeId})" class="link-success" style="text-decoration: none; color:#fff">Active/InActive</a>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
 
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Tax Payer Id</th>
-                    <th>Full Name</th>
-                    <th>Total Income</th>
-                    <th>Total Reliefs</th>
-                    <th>Edit</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
-        </table>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Tax Payer Id</th>
+                        <th>Full Name</th>
+                        <th>Total Income</th>
+                        <th>Total Reliefs</th>
+                        <th>Edit</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        }
     </div>
     <div class="card-footer">
-        <button type="button" class="btn btn-primary float-right">Forward Schedule</button>
+        <button type="button" class="btn btn-primary float-right">
+        
+            <i class="fa fa-arrow">
+                <a href="@Url.Action("Index", "Schedule")" class="link-success" style="text-decoration: none; color:#fff">
+                    Forward Schedule
+        </a>
+            </i>
+        </button>
     </div>
 </div>
 
@@ -215,4 +148,4 @@
         });
     });
 
-</script>*@
+</script>

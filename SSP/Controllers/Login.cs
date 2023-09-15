@@ -43,37 +43,28 @@ namespace SSP.Controllers
         [HttpPost]
         public ActionResult SignIn(SignIn model)
         {
-            if (model.UserType != "Company")
-            {
-                var getTaxpayertype = _db.TaxPayerTypes.ToList();
-                ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
+            //if (model.UserType != "Company")
+            //{
+            //    var getTaxpayertype = _db.TaxPayerTypes.ToList();
+            //    ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
 
-                TempData["AlertMessage"] = $"Incorrect UserType";
-                return View();
-            }
-            if ((model.Password == null) || (model.Password.Length < 5))
-            {
-                var getTaxpayertype = _db.TaxPayerTypes.ToList();
-                ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
-                ModelState.AddModelError("Password", "Please Enter Valid Password as the length is less than 5");
-                TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
-                return View();
-            }
-            Company eirsUser = new Company();
-            var ret = _db.Companies.SingleOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.MobileNumber1 == model.PhoneNumber_RIN.ToString().Trim()));
+            //    TempData["AlertMessage"] = $"Incorrect UserType";
+            //    return View();
+            //}
+            //if ((model.Password == null) || (model.Password.Length < 5))
+            //{
+            //    var getTaxpayertype = _db.TaxPayerTypes.ToList();
+            //    ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
+            //    ModelState.AddModelError("Password", "Please Enter Valid Password as the length is less than 5");
+            //    TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
+            //    return View();
+            //}
+            //Company eirsUser = new Company();
+            //var ret = _db.Companies.SingleOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.MobileNumber1 == model.PhoneNumber_RIN.ToString().Trim()));
 
-            if (ret != null)
-            {
-                if(BCrypt.Net.BCrypt.Verify(model.Password, ret.Password))
-                {
-                    HttpContext.Session.SetString("username", ret.CompanyName.ToString());
-                    HttpContext.Session.SetString("rin", ret.CompanyRin.ToString());
-                    TempData["AlertMessage"] = $"Welcome {ret.CompanyName}";
-                    return Redirect("/Dashboard/Index");
-                }
-            }
+            return Redirect("/Dashboard/Index");
 
-            return Ok("Invalid Login Detail");
+           // return Ok("Invalid Login Detail");
         }
 
         [HttpGet]
