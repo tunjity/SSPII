@@ -1,0 +1,167 @@
+﻿
+
+@model SSP.Models.CreationModel.CompanyFormModel
+@if (TempData["AlertMessage"] != null)
+{
+    if (TempData["AlertMessage"].ToString().Contains("Error"))
+    {
+        <div class="alert alert-danger">
+            <strong>An Error Occur !</strong> @TempData["AlertMessage"]
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success">
+            <strong>Success !</strong> @TempData["AlertMessage"]
+        </div>
+    }
+}
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4CAF50;">
+    <!-- Container wrapper -->
+    <div class="container">
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="#">
+            <img src="/images/logo1.png" alt="Logo" class="img-fluid my-0 mx-0" loading="lazy" style="max-width: 280px; max-height: 45px; margin-top: -1px;">
+        </a>
+
+
+        <!-- Toggle button -->
+        <button class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarButtonsExample"
+                aria-controls="navbarButtonsExample"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <!-- Left links -->
+
+            <div class="d-flex align-items-center">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="@Url.Action("SignIn", "Login")">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">FAQ's</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">CONTACT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-sign-in text-white" aria-hidden="true"></i>
+                        <a class="nav-link text-white" href="#">ADMIN</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+<style>
+    .navbar-nav li {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+        .navbar-nav li i {
+            margin-right: 2px;
+        }
+</style>
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="/images/img.jpg"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <div class="mx-auto text-center my-2">
+                    <img src="assets/images/user.png" alt="" srcset="" width="75">
+                </div>
+                @using (Html.BeginForm("CreateAccountStepOneDone", "Login", FormMethod.Post))
+                {
+                    <form>
+                        <!-- Select input -->
+                    @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group">
+                            <strong> Enter PhoneNumber or RIN :</strong><br />
+                            @Html.TextBoxFor(Model => Model.MobileNumber1orRIN, new { @class = "form-control", @autocomplete = "off", @tabindex = "1", @placeholder = "Enter PhoneNumber or RIN" })
+                            @Html.ValidationMessageFor(Model => Model.MobileNumber1orRIN, "", new { @class = "help-block" })
+                        </div>
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn text-white" type="submit" style="padding-left: 2.5rem; padding-right: 2.5rem; border-radius: 30px; background-color: #4CAF50 !important;">Verify</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .divider:after,
+    .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+    }
+
+    .h-custom {
+        height: calc(100% - 73px);
+    }
+
+    media (max-width: 450px) {
+        .h-custom
+
+    {
+        height: 100%;
+    }
+
+    }
+
+    .password-field {
+        position: relative;
+    }
+
+    .password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+        .password-toggle i {
+            font-size: 18px;
+            color: #999;
+        }
+
+        .password-toggle.active i {
+            color: #333;
+        }
+
+</style>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
