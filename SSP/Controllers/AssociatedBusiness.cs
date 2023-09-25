@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SSP.Infrastructure;
-using SSP.Infrastructure.RawSql;
+using SSP.Repository.Infrastructure;
+using SSP.Repository.Infrastructure.RawSql;
 
 namespace SSP.Controllers
 {

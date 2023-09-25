@@ -24,9 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModel\" />
     <Folder Include="Template\" />
     <Folder Include="wwwroot\NewTemplate\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SSP.Repository\SSP.Repository.csproj" />
   </ItemGroup>
 
 </Project>

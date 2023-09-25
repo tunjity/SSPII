@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using SSP.EIRSModel;
-using SSP.Models.CreationModel;
+using SSP.Repository.EIRSModel;
+using SSP.Repository.Models.CreationModel;
 using System.Data;
 using System.Net;
 using System.Text;
@@ -27,6 +27,12 @@ namespace SSP.Controllers
         }
 
         [HttpGet]
+        public ActionResult SignOut()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/Login/SignIn");
+        } 
+        [HttpGet]
         public ActionResult SignIn()
         {
             var getTaxpayertype = _db.TaxPayerTypes.ToList();
@@ -37,37 +43,37 @@ namespace SSP.Controllers
         [HttpPost]
         public ActionResult SignIn(SignIn model)
         {
-            if (model.UserType != "Company")
-            {
-                var getTaxpayertype = _db.TaxPayerTypes.ToList();
-                ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
+            //if (model.UserType != "Company")
+            //{
+            //    var getTaxpayertype = _db.TaxPayerTypes.ToList();
+            //    ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
 
-                TempData["AlertMessage"] = $"Incorrect UserType";
-                return View();
-            }
-            if ((model.Password == null) || (model.Password.Length < 5))
-            {
-                var getTaxpayertype = _db.TaxPayerTypes.ToList();
-                ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
-                ModelState.AddModelError("Password", "Please Enter Valid Password as the length is less than 5");
-                TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
-                return View();
-            }
-            Company eirsUser = new Company();
-            var ret = _db.Companies.SingleOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.MobileNumber1 == model.PhoneNumber_RIN.ToString().Trim()));
+            //    TempData["AlertMessage"] = $"Incorrect UserType";
+            //    return View();
+            //}
+            //if ((model.Password == null) || (model.Password.Length < 5))
+            //{
+            //    var getTaxpayertype = _db.TaxPayerTypes.ToList();
+            //    ViewBag.TaxPayerTypeList = ToSelectList(getTaxpayertype);
+            //    ModelState.AddModelError("Password", "Please Enter Valid Password as the length is less than 5");
+            //    TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
+            //    return View();
+            //}
+            //Company eirsUser = new Company();
+            //var ret = _db.Companies.SingleOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.MobileNumber1 == model.PhoneNumber_RIN.ToString().Trim()));
 
-            if (ret != null)
-            {
-                if(BCrypt.Net.BCrypt.Verify(model.Password, ret.Password))
-                {
-                    HttpContext.Session.SetString("username", ret.CompanyName.ToString());
-                    HttpContext.Session.SetString("rin", ret.CompanyRin.ToString());
-                    TempData["AlertMessage"] = $"Welcome {ret.CompanyName}";
-                    return Redirect("/Dashboard/Index");
-                }
-            }
+            //if (ret != null)
+            //{
+            //    if(BCrypt.Net.BCrypt.Verify(model.Password, ret.Password))
+            //    {
+            //        HttpContext.Session.SetString("username", ret.CompanyName.ToString());
+            //        HttpContext.Session.SetString("rin", ret.CompanyRin.ToString());
+            //        TempData["AlertMessage"] = $"Welcome {ret.CompanyName}";
+                   return Redirect("/dashboard/index");
+              //  }
+            //}
 
-            return Ok("Invalid Login Detail");
+            //return Ok("Invalid Login Detail");
         }
 
         [HttpGet]
@@ -75,31 +81,31 @@ namespace SSP.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult ForgetPassword(ForgetPassword model)
-        {
-            if ((model.Password == null) || (model.Password.Length < 5))
-            {
-                TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
-                return View();
-            }
-            Company eirsUser = new Company();
-            var ret = _db.Companies.FirstOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()));
+        //[HttpPost]
+        //public ActionResult ForgetPassword(ForgetPassword model)
+        //{
+        //    if ((model.Password == null) || (model.Password.Length < 5))
+        //    {
+        //        TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
+        //        return View();
+        //    }
+        //    Company eirsUser = new Company();
+        //    var ret = _db.Companies.FirstOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()));
 
-            if (ret == null)
-            {
-                TempData["AlertMessage"] = $"Incorrect User Not Found";
-                return Redirect("/Login/CreateAccount");
-            }
-            else
-            {
-                ret.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
-                _db.SaveChanges();
-                TempData["AlertMessage"] = $"Password Changed Successfully";
-                return Redirect("/Login/SignIn");
-            }
+        //    if (ret == null)
+        //    {
+        //        TempData["AlertMessage"] = $"Incorrect User Not Found";
+        //        return Redirect("/Login/CreateAccount");
+        //    }
+        //    else
+        //    {
+        //        ret.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+        //        _db.SaveChanges();
+        //        TempData["AlertMessage"] = $"Password Changed Successfully";
+        //        return Redirect("/Login/SignIn");
+        //    }
 
-        }
+        //}
 
         [HttpGet]
         public ActionResult CreateAccount()
