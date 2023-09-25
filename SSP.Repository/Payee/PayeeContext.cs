@@ -359,12 +359,13 @@ public partial class PayeeContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            //IConfigurationRoot configuration = new ConfigurationBuilder()
-            //   .SetBasePath(Directory.GetCurrentDirectory())
-            //   .AddJsonFile("appsettings.json")
-            //   .Build();
-            //var connectionString = configuration.GetConnectionString("PayeContext");
-            //optionsBuilder.UseSqlServer(connectionString);
+            
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json")
+               .Build();
+            var connectionString = configuration.GetConnectionString("PayeContext");
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)

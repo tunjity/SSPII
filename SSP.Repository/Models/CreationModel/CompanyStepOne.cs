@@ -23,14 +23,11 @@ namespace SSP.Repository.Models.CreationModel
     } 
     public class CompanyStepTwo
     {
+        public int? CompanyId { get; set; }
         [Required(ErrorMessage = "Enter your password")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string? Password { get; set; }
-        [Required(ErrorMessage = "Enter your Confirm password")]
-        [DataType(DataType.Password)]
-        [Display(Name = "ConfirmPassword")]
-        public string? ConfirmPassword { get; set; }
         public int? VerificationOtp { get; set; }
     }
 }
