@@ -1884,7 +1884,7 @@ namespace SSP.Repository.Infrastructure
     //}
     //#endregion
 
-    ////#region Company
+    //#region Company
     //public class CompanyRepository : ICompanyRepository
     //{
     //    private IGenericRepository<Company> _repository = null;

@@ -81,31 +81,31 @@ namespace SSP.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public ActionResult ForgetPassword(ForgetPassword model)
-        //{
-        //    if ((model.Password == null) || (model.Password.Length < 5))
-        //    {
-        //        TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
-        //        return View();
-        //    }
-        //    Company eirsUser = new Company();
-        //    var ret = _db.Companies.FirstOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()));
+        [HttpPost]
+        public ActionResult ForgetPassword(ForgetPassword model)
+        {
+            if ((model.Password == null) || (model.Password.Length < 5))
+            {
+                TempData["AlertMessage"] = $"Incorrect Please Enter Valid Password as the length is less than 5";
+                return View();
+            }
+            Company eirsUser = new Company();
+            var ret = _db.Companies.FirstOrDefault(o => (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()) || (o.CompanyRin == model.PhoneNumber_RIN.ToString().Trim()));
 
-        //    if (ret == null)
-        //    {
-        //        TempData["AlertMessage"] = $"Incorrect User Not Found";
-        //        return Redirect("/Login/CreateAccount");
-        //    }
-        //    else
-        //    {
-        //        ret.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
-        //        _db.SaveChanges();
-        //        TempData["AlertMessage"] = $"Password Changed Successfully";
-        //        return Redirect("/Login/SignIn");
-        //    }
+            if (ret == null)
+            {
+                TempData["AlertMessage"] = $"Incorrect User Not Found";
+                return Redirect("/Login/CreateAccount");
+            }
+            else
+            {
+                ret.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+                _db.SaveChanges();
+                TempData["AlertMessage"] = $"Password Changed Successfully";
+                return Redirect("/Login/SignIn");
+            }
 
-        //}
+        }
 
         [HttpGet]
         public ActionResult CreateAccount()
